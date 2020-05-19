@@ -1,0 +1,32 @@
+<template>
+  <form submit.trigger="addPoi()" class="ui form stacked segment">
+    <h3 class="ui dividing header"> Add a Point of Interest </h3>
+    <div class="field">
+      <label>Name Of POI </label> <input value.bind="name">
+    </div>
+    <div class="field">
+      <label>Category </label> <input value.bind="category">
+    </div>
+    <div class="field">
+      <label>Description </label> <input value.bind="description">
+    </div>
+    <div class="field">
+      <label>Upload an Image</label>
+      <input value.bind="image" type="file" accept="image/png, image/jpeg">
+    </div>
+    <div class="one field">
+      <label>Location</label>
+      <div class="two fields">
+        <div class="field">
+          <label>Longitude</label>
+          <input value.bind="longitude" type="number" step="any">
+        </div>
+        <div class="field">
+          <label>Latitude</label>
+          <input value.bind="latitude" type="number" step="any">
+        </div>
+      </div>
+    </div>
+    <button class="ui blue submit button">Add POI</button>
+  </form>
+</template>
