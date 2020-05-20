@@ -6,7 +6,7 @@ import { RatingService} from '../services/rating-service';
 export class Pois {
   pois: Poi[] = [];
 
-  constructor(private rs: RatingService ) {
-    this.pois = rs.pois;
+  constructor(private rts: RatingService ) {
+    this.pois = rts.pois;
   }
 }
