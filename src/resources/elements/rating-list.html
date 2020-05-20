@@ -4,11 +4,13 @@
     <table class="ui celled table segment">
       <thead>
       <tr>
+        <th>Poi</th>
         <th>Ratings</th>
       </tr>
       </thead>
       <tbody>
       <tr repeat.for="rating of ratings">
+        <td>${rating.poi.name}</td>
         <td> ${rating.rating}</td>
       </tr>
       </tbody>

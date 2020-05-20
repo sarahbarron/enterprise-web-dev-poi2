@@ -23,6 +23,7 @@ export class RatingForm{
   makeRating(){
     const rating = {
       rating: this.selectedRating,
+      poi: this.selectedPoi
     };
     this.ratings.push(rating);
     console.log(this.ratings);

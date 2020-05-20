@@ -5,8 +5,8 @@
 
     <div class="grouped inline fields">
       <label>Select a POI to rate</label>
-      <select name="poi" class="ui fluid dropdown">
-        <option model.bind="poi" checked.bind="selectedPoi" repeat.for="poi of pois" value=${poi.name}>${poi.name}</option>
+      <select class="ui fluid dropdown" value.bind="selectedPoi" >
+        <option repeat.for="poi of pois" model.bind="poi" >${poi.name}</option>
       </select>
 
     </div>

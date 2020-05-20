@@ -9,5 +9,6 @@ export interface Poi {
 
 export interface Rating {
   rating: number;
+  poi: Poi;
 }
 
