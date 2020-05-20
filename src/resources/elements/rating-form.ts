@@ -27,9 +27,4 @@ export class RatingForm{
     this.ratings.push(rating);
     console.log(this.ratings);
   };
-
-  constructor() {
-    this.pois.push({ name: 'Waterford', category: "Waterford Greenway", description: "Nice", image: "", longitude: 23, latitude: 100});
-    this.pois.push({ name: 'Galway', category: "Great Western Greenway", description: "Lovely", image: "", longitude: 56, latitude: 440});
-  }
 }
