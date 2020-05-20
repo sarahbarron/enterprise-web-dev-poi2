@@ -12,6 +12,13 @@ export class App {
         moduleId: PLATFORM.moduleName('views/pois'),
         nav: true,
         title: 'Pois'
+      },
+      {
+        route:['rating'],
+        name: 'Rating',
+        moduleId: PLATFORM.moduleName('views/ratings'),
+        nav: true,
+        title: 'Rating'
       }
     ]);
     this.router = router;

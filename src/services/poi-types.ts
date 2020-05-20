@@ -6,3 +6,8 @@ export interface Poi {
   longitude: number;
   latitude: number;
 }
+
+export interface Rating {
+  rating: number;
+}
+
