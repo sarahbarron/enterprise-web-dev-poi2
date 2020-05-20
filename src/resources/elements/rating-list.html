@@ -1,0 +1,19 @@
+<template>
+  <div class="ui stacked segment">
+    <h3 class="ui dividing header"> Ratings of Poi to Date </h3>
+    <table class="ui celled table segment">
+      <thead>
+      <tr>
+        <th>Poi</th>
+        <th>Ratings</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr repeat.for="rating of ratings">
+        <td>${rating.poi.name}</td>
+        <td> ${rating.rating} <i class="star yellow icon"></i></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</template>

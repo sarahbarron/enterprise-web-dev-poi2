@@ -1,0 +1,15 @@
+<template>
+  <require from="../resources/elements/rating-list"></require>
+  <require from="../resources/elements/rating-form"></require>
+
+  <div class="ui stackable two column grid">
+    <div class="column">
+      <rating-form ratings.two-way="ratings" star-ratings.bind="starRatings" pois.bind="pois">
+
+      </rating-form>
+    </div>
+    <div class="column">
+      <rating-list ratings.bind="ratings"></rating-list>
+    </div>
+  </div>
+</template>
