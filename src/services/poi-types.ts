@@ -15,3 +15,10 @@ export interface Rating {
 export interface Category {
   name: string;
 }
+
+export interface User {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
