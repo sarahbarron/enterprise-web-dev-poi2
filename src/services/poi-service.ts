@@ -1,5 +1,5 @@
 import {inject} from 'aurelia-framework';
-import { Poi, Rating, Category, User } from './poi-types';
+import { Poi, Rating, Category, User} from './poi-types';
 import {HttpClient} from 'aurelia-http-client';
 import {EventAggregator} from 'aurelia-event-aggregator'
 import { NumOfPoiUpdate } from './messages';
