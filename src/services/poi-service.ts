@@ -1,8 +1,10 @@
 import {inject} from 'aurelia-framework';
 import { Poi, Rating, Category } from './poi-types';
 import {HttpClient} from 'aurelia-http-client';
+import {EventAggregator} from 'aurelia-event-aggregator'
+import { NumOfPoiUpdate } from './messages';
 
-@inject(HttpClient)
+@inject(HttpClient, EventAggregator)
 export class PoiService{
 
   pois: Poi[] =[];
@@ -10,7 +12,7 @@ export class PoiService{
   categories: Category[] = [];
   total = 0;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private ea: EventAggregator) {
     httpClient.configure(http => {
       http.withBaseUrl('http://localhost:8080');
     });
@@ -34,6 +36,7 @@ export class PoiService{
     }
     this.pois.push(poi);
     this.total = this.total + 1;
+    this.ea.publish(new NumOfPoiUpdate(this.total));
     console.log(this.poi);
     console.log(this.total);
   }
