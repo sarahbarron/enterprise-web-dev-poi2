@@ -1,19 +1,18 @@
 <template>
   <require from="../resources/elements/poi-list"></require>
   <require from="../resources/elements/poi-form"></require>
+  <require from="../resources/elements/total-pois"></require>
+
   <div class="ui container">
-    <section class="ui raised segment">
-      <h3 class="ui headder"> Points Of Interest </h3>
-    </section>
-    <div class="ui basic segment">
-      <div class="ui stackable two column grid">
-        <div class="column">
+    <div class="ui stackable grid">
+        <div class="seven wide column">
           <poi-form pois.two-way="pois" categories.bind="categories"></poi-form>
         </div>
-        <div class="column">
+        <div class ="two wide column">
+          <total-pois total.bind="total"></total-pois>
+        </div>
+        <div class="seven wide column">
           <poi-list pois.bind="pois"></poi-list>
         </div>
-      </div>
-    </div>
   </div>
 </template>
