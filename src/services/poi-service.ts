@@ -1,12 +1,29 @@
+import {inject} from 'aurelia-framework';
 import { Poi, Rating, Category } from './poi-types';
+import {HttpClient} from 'aurelia-http-client';
+import {EventAggregator} from 'aurelia-event-aggregator'
+import { NumOfPoiUpdate } from './messages';
 
+@inject(HttpClient, EventAggregator)
 export class PoiService{
 
   pois: Poi[] =[];
   ratings: Rating[] = [];
   categories: Category[] = [];
-  totalPoi = 0;
+  total = 0;
 
+  constructor(private httpClient: HttpClient, private ea: EventAggregator) {
+    httpClient.configure(http => {
+      http.withBaseUrl('http://localhost:8080');
+    });
+    this.getCategories();
+  }
+
+  async getCategories(){
+    const response = await this.httpClient.get('/api/categories.json');
+    this.categories = await response.content;
+    console.log(this.categories);
+  }
   // Constructor of a new poi
   async poi(name: string, category: Category, description: string, image: object, longitude: number, latitude: number){
     const poi = {
@@ -18,10 +35,11 @@ export class PoiService{
       latitude: latitude
     }
     this.pois.push(poi);
-    this.totalPoi = this.totalPoi + 1;
+    this.total = this.total + 1;
+    this.ea.publish(new NumOfPoiUpdate(this.total));
     console.log(this.poi);
-    console.log(this.totalPoi);
-  };
+    console.log(this.total);
+  }
 
   // constructor of a new category
   async category(name:string){
@@ -39,7 +57,6 @@ export class PoiService{
     };
     this.ratings.push(rating);
     console.log(this.ratings);
-  };
-
+  }
 
 }
