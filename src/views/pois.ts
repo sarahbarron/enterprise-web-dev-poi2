@@ -6,7 +6,7 @@ import { RatingService} from '../services/rating-service';
 @inject(RatingService)
 export class Pois {
 
-  pois: Poi[] = [];
+  pois: Poi[];
   categories: Category[];
 
   constructor(private rts: RatingService ) {

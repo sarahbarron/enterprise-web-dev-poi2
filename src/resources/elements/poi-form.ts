@@ -10,7 +10,6 @@ export class PoiForm {
 
   @bindable
   pois: Poi[] = [];
-
   @bindable
   categories: Category[] = [];
   selectedCategory: Category = null;
@@ -27,9 +26,9 @@ export class PoiForm {
     this.pois.push(poi);
     console.log(poi);
   }
-
   constructor() {
     this.categories.push({name:'Waterford'});
     this.categories.push({name:'galway'});
   }
 }
+

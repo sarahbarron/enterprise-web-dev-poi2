@@ -4,10 +4,11 @@ import {RatingService} from '../services/rating-service';
 
 @inject(RatingService)
 export class Ratings{
-    ratings: Rating[] = [];
+    ratings: Rating[];
     pois: Poi[];
 
     constructor(private rts: RatingService) {
       this.pois = rts.pois;
+      this.ratings = rts.ratings;
     }
 }
