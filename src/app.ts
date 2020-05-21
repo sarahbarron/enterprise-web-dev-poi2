@@ -8,17 +8,24 @@ export class App {
     config.map([
       {
         route: ['', 'pois'],
-        name: 'Pois',
+        name: 'pois',
         moduleId: PLATFORM.moduleName('views/pois'),
         nav: true,
         title: 'Pois'
       },
       {
         route:['rating'],
-        name: 'Rating',
+        name: 'rating',
         moduleId: PLATFORM.moduleName('views/ratings'),
         nav: true,
         title: 'Rating'
+      },
+      {
+        route:['categories'],
+        name: 'categories',
+        moduleId: PLATFORM.moduleName(('views/categories')),
+        nav: true,
+        title: 'Categories',
       }
     ]);
     this.router = router;

@@ -16,6 +16,7 @@ export class RatingForm{
 
   // The rating given
   selectedRating=null;
+
   // The POI selected
   selectedPoi: Poi = null;
 
