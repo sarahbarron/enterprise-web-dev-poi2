@@ -1,6 +1,8 @@
-import { bindable } from 'aurelia-framework';
+import { bindable, inject } from 'aurelia-framework';
 import { Poi, Category } from "../../services/poi-types";
+import { PoiService } from '../../services/poi-service';
 
+@inject(PoiService)
 export class PoiForm {
   name: string;
   description: string;
@@ -9,26 +11,16 @@ export class PoiForm {
   latitude: number;
 
   @bindable
-  pois: Poi[] = [];
+  pois: Poi[];
   @bindable
-  categories: Category[] = [];
+  categories: Category[];
   selectedCategory: Category = null;
 
+  constructor(private ps:PoiService) {}
+
   addPoi() {
-    const poi = {
-      name: this.name,
-      category: this.selectedCategory,
-      description: this.description,
-      image: this.image,
-      longitude: this.longitude,
-      latitude: this.latitude,
-    };
-    this.pois.push(poi);
-    console.log(poi);
+    this.ps.poi(this.name, this.selectedCategory, this.description, this.image, this.longitude, this.latitude);
   }
-  constructor() {
-    this.categories.push({name:'Waterford'});
-    this.categories.push({name:'galway'});
-  }
+
 }
 

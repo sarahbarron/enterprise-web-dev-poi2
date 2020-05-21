@@ -1,15 +1,18 @@
 import { inject } from 'aurelia-framework';
 import { Poi, Category } from '../services/poi-types';
-import { RatingService} from '../services/rating-service';
+import { PoiService} from '../services/poi-service';
 
 
-@inject(RatingService)
+
+@inject(PoiService)
 export class Pois {
 
   pois: Poi[];
   categories: Category[];
 
-  constructor(private rts: RatingService ) {
-    this.pois = rts.pois;
+  constructor(private ps: PoiService) {
+    this.pois = ps.pois;
+    this.categories = ps.categories;
   }
+
 }

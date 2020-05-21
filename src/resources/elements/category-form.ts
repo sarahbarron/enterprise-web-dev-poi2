@@ -1,19 +1,18 @@
-import {bindable} from 'aurelia-framework';
+import {bindable, inject} from 'aurelia-framework';
 import { Category } from '../../services/poi-types';
+import { PoiService } from '../../services/poi-service';
 
+@inject(PoiService)
 export class CategoryForm {
 
+  @bindable
+  categories: Category[];
   name: string;
 
-  @bindable
-  categories: Category[] = [];
-
+  constructor(private ps: PoiService) {
+  }
   makeCategory(){
-    const category = {
-      name: this.name,
-    };
-    this.categories.push(category);
-    console.log(this.categories);
+    this.ps.category(this.name);
   }
 
 }
