@@ -1,5 +1,5 @@
 import {inject} from 'aurelia-framework';
-import { Poi, Rating, Category } from './poi-types';
+import { Poi, Rating, Category, User } from './poi-types';
 import {HttpClient} from 'aurelia-http-client';
 import {EventAggregator} from 'aurelia-event-aggregator'
 import { NumOfPoiUpdate } from './messages';
@@ -11,12 +11,24 @@ export class PoiService{
   ratings: Rating[] = [];
   categories: Category[] = [];
   total = 0;
+  users: Map<string, User> = new Map();
+
 
   constructor(private httpClient: HttpClient, private ea: EventAggregator) {
     httpClient.configure(http => {
       http.withBaseUrl('http://localhost:8080');
     });
+    this.getUsers();
     this.getCategories();
+  }
+
+  async getUsers()
+  {
+    const response = await this.httpClient.get('/api/users.json');
+    const users = await response.content;
+    users.forEach(user => {
+      this.users.set(user.email, user);
+    });
   }
 
   async getCategories(){
