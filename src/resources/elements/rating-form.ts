@@ -1,31 +1,23 @@
-import { bindable } from 'aurelia-framework';
+import { bindable, inject } from 'aurelia-framework';
 import { Rating, Poi } from '../../services/poi-types';
+import { PoiService } from '../../services/poi-service';
 
 /*
 * Form for submitting a rating for a Point of interest
 * */
+@inject(PoiService)
 export class RatingForm{
 
-  // Stores a list of rating values
   @bindable
-  ratings: Rating[] = []
-
-  // Sores a list of POIs
+  ratings: Rating[];
   @bindable
-  pois: Poi[] = [];
-
-  // The rating given
+  pois: Poi[];
   selectedRating=null;
-  // The POI selected
   selectedPoi: Poi = null;
 
-// when a rating is given add it to the list of ratings
-  makeRating(){
-    const rating = {
-      rating: this.selectedRating,
-      poi: this.selectedPoi
-    };
-    this.ratings.push(rating);
-    console.log(this.ratings);
-  };
+ constructor(private rts:PoiService) {}
+   makeRating()
+   {
+     this.rts.rating(this.selectedRating, this.selectedPoi);
+   }
 }

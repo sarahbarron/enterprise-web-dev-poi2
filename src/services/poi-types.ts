@@ -1,6 +1,6 @@
 export interface Poi {
   name: string;
-  category: string;
+  category: Category;
   description: string;
   image: any;
   longitude: number;
@@ -12,3 +12,6 @@ export interface Rating {
   poi: Poi;
 }
 
+export interface Category {
+  name: string;
+}
