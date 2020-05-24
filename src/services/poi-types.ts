@@ -1,24 +1,40 @@
 export interface Poi {
+  _id: string;
   name: string;
-  category: Category;
   description: string;
-  image: any;
   longitude: number;
   latitude: number;
+  user: User;
+  category: Category;
 }
 
-export interface Rating {
-  rating: number;
-  poi: Poi;
-}
 
 export interface Category {
+  _id: string;
   name: string;
 }
 
 export interface User {
+  _id:string;
   firstName: string;
   lastName: string;
   email: string;
   password: string;
+  numOfPoi: number;
+  scope: any;
 }
+
+export interface Rating {
+  _id: string;
+  rating: number;
+  review: string;
+  poi: Poi;
+}
+
+export interface Image {
+  _id: string;
+  public_id: string;
+  url: string;
+  poi: Poi;
+}
+

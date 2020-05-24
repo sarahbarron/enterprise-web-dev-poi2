@@ -4,11 +4,12 @@ import { PoiService } from '../../services/poi-service';
 
 @inject(PoiService)
 export class PoiForm {
+
   name: string;
   description: string;
-  image: any;
   longitude: number;
   latitude: number;
+
 
   @bindable
   pois: Poi[];
@@ -19,7 +20,7 @@ export class PoiForm {
   constructor(private ps:PoiService) {}
 
   addPoi() {
-    this.ps.poi(this.name, this.selectedCategory, this.description, this.image, this.longitude, this.latitude);
+    this.ps.poi(this.name, this.selectedCategory, this.description, this.longitude, this.latitude);
   }
 
 }
