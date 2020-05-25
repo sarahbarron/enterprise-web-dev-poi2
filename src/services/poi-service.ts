@@ -86,15 +86,14 @@ export class PoiService{
   }
 
   // Constructor of a new poi
-  async poi(name: string, category: Category, description: string, longitude: number, latitude: number, user: User){
+  async poi(name: string, category: Category, description: string, longitude: number, latitude: number){
     const poi = {
       _id: '',
       name: name,
       category: category,
       description: description,
       longitude: longitude,
-      latitude: latitude,
-      user: user
+      latitude: latitude
     }
     const response = await this.httpClient.post('/api/pois/', poi);
     const newPoi = await response.content;
@@ -123,8 +122,19 @@ export class PoiService{
     this.images.push(image);
     console.log(this.image);
   }
-  signup(firstName: string, lastName: string, email: string, password: string) {
-    //this.changeRouter(PLATFORM.moduleName('app'))
+
+  async signup(firstName: string, lastName: string, email: string, password: string) {
+    const user = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password
+    };
+    const response = await this.httpClient.post('/api/users', user);
+    const newUser = await response.content;
+    this.users.set(newUser.email, newUser);
+    this.usersById.set(newUser._id, newUser);
+    this.changeRouter(PLATFORM.moduleName('app'))
     return false;
   }
 
