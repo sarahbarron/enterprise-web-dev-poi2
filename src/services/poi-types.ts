@@ -8,6 +8,14 @@ export interface Poi {
   category: Category;
 }
 
+export interface RawPoi {
+  name: string;
+  description: string;
+  longitude: number;
+  latitude: number;
+  user: string;
+  category: string;
+}
 
 export interface Category {
   _id: string;
@@ -30,11 +38,21 @@ export interface Rating {
   review: string;
   poi: Poi;
 }
+export interface RawRating {
+  rating: number;
+  review: string;
+  poi: string;
+}
 
 export interface Image {
   _id: string;
   public_id: string;
   url: string;
   poi: Poi;
+}
+export interface RawImage {
+  public_id: string;
+  url: string;
+  poi: string;
 }
 

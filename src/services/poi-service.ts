@@ -1,7 +1,7 @@
 import {inject, Aurelia} from 'aurelia-framework';
 import { Router } from 'aurelia-router';
 import {PLATFORM } from 'aurelia-pal';
-import { Poi, Rating, Category, User, Image} from './poi-types';
+import { Poi, Rating, Category, User, Image, RawPoi, RawImage, RawRating} from './poi-types';
 import {HttpClient} from 'aurelia-http-client';
 import {EventAggregator} from 'aurelia-event-aggregator'
 import { NumOfPoiUpdate } from './messages';
@@ -15,7 +15,7 @@ export class PoiService{
   images: Image[] = [];
   total = 0;
   users: Map<string, User> = new Map();
-
+  usersById: Map<string, User> = new Map();
 
   constructor(private httpClient: HttpClient, private ea: EventAggregator, private au: Aurelia, private router: Router)
   {
@@ -31,11 +31,11 @@ export class PoiService{
   {
     const response = await this.httpClient.get('/api/users');
     const users = await response.content;
-    console.log(users);
     users.forEach(user => {
       this.users.set(user.email, user);
-
+      this.usersById.set(user._id, user);
     });
+    console.log(users);
   }
 
   async getCategories(){
@@ -44,45 +44,15 @@ export class PoiService{
     console.log(this.categories);
   }
 
-  async getPois(){
-    const response = await this.httpClient.get('/api/pois');
-    this.pois = await response.content;
-    console.log(this.pois);
-  }
-
-  async getImages(){
-    const response = await this.httpClient.get('/api/images');
-    this.images = await response.content;
-    console.log(this.images);
-  }
-
-
-  // Constructor of a new poi
-  async poi(name: string, category: Category, description: string, longitude: number, latitude: number){
-    const poi = {
-      _id: '',
-      name: name,
-      category: category,
-      description: description,
-      longitude: longitude,
-      latitude: latitude
-    }
-    const response = await this.httpClient.post('/api/pois/', poi);
-    const newPoi = await response.content
-    this.pois.push(newPoi);
-    this.total = this.total + 1;
-    this.ea.publish(new NumOfPoiUpdate(this.total));
-    console.log(this.poi);
-    console.log(this.total);
-  }
-
   // constructor of a new category
   async category(name:string){
     const category = {
       _id: '',
       name: name
     }
-    this.categories.push(category);
+    const response = await this.httpClient.post('/api/categories/', category);
+    const newCategory = await response.content;
+    this.categories.push(newCategory);
     console.log(this.categories);
   }
   // constructor of a new rating
@@ -96,6 +66,51 @@ export class PoiService{
     this.ratings.push(rating);
     console.log(this.ratings);
   }
+
+  async getPois(){
+    const response = await this.httpClient.get('/api/pois');
+    const rawPois: RawPoi[] = await response.content;
+    rawPois.forEach(rawPoi => {
+      const poi = {
+        _id: "",
+        name: rawPoi.name,
+        category: this.categories.find(category => rawPoi.category == category._id),
+        description: rawPoi.description,
+        longitude: rawPoi.longitude,
+        latitude: rawPoi.latitude,
+        user: this.usersById.get(rawPoi.user)
+      }
+      this.pois.push(poi);
+      console.log(this.pois);
+    })
+  }
+
+  // Constructor of a new poi
+  async poi(name: string, category: Category, description: string, longitude: number, latitude: number, user: User){
+    const poi = {
+      _id: '',
+      name: name,
+      category: category,
+      description: description,
+      longitude: longitude,
+      latitude: latitude,
+      user: user
+    }
+    const response = await this.httpClient.post('/api/pois/', poi);
+    const newPoi = await response.content;
+    this.pois.push(newPoi);
+    this.total = this.total + 1;
+    this.ea.publish(new NumOfPoiUpdate(this.total));
+    console.log(this.poi);
+    console.log(this.total);
+  }
+
+  async getImages(){
+    const response = await this.httpClient.get('/api/images');
+    this.images = await response.content;
+    console.log(this.images);
+  }
+
 
   // constructor of a new rating
   async image(public_id: string, url: string, poi: Poi){
