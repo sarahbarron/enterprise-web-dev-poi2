@@ -14,10 +14,11 @@ export class RatingForm{
   pois: Poi[];
   selectedRating=null;
   selectedPoi: Poi = null;
+  review: string;
 
  constructor(private rts:PoiService) {}
    makeRating()
    {
-     this.rts.rating(this.selectedRating, this.selectedPoi);
+     this.rts.rating(this.selectedRating, this.review, this.selectedPoi);
    }
 }

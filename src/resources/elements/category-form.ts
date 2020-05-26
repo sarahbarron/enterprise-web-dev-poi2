@@ -9,8 +9,7 @@ export class CategoryForm {
   categories: Category[];
   name: string;
 
-  constructor(private ps: PoiService) {
-  }
+  constructor(private ps: PoiService) {}
   makeCategory(){
     this.ps.category(this.name);
   }
