@@ -5,6 +5,7 @@ import { Poi, Rating, Category, User, Image, RawPoi, RawImage, RawRating} from '
 import {HttpClient} from 'aurelia-http-client';
 import {EventAggregator} from 'aurelia-event-aggregator'
 import { NumOfPoiUpdate } from './messages';
+import { RuleSetRule } from 'webpack';
 
 @inject(HttpClient, EventAggregator, Aurelia, Router)
 export class PoiService{
@@ -47,10 +48,9 @@ export class PoiService{
   // constructor of a new category
   async category(name:string){
     const category = {
-      _id: '',
       name: name
     }
-    const response = await this.httpClient.post('/api/categories/', category);
+    const response = await this.httpClient.post('/api/categories', category);
     const newCategory = await response.content;
     this.categories.push(newCategory);
     console.log(this.categories);
@@ -88,16 +88,15 @@ export class PoiService{
   // Constructor of a new poi
   async poi(name: string, category: Category, description: string, longitude: number, latitude: number){
     const poi = {
-      _id: '',
       name: name,
       category: category,
       description: description,
       longitude: longitude,
-      latitude: latitude
+      latitude: latitude,
     }
-    const response = await this.httpClient.post('/api/pois/', poi);
-    const newPoi = await response.content;
-    this.pois.push(newPoi);
+    const response = await this.httpClient.post('/api/pois', poi);
+    // const newPoi = await response.content;
+    this.pois.push(poi);
     this.total = this.total + 1;
     this.ea.publish(new NumOfPoiUpdate(this.total));
     console.log(this.poi);
@@ -109,7 +108,6 @@ export class PoiService{
     this.images = await response.content;
     console.log(this.images);
   }
-
 
   // constructor of a new rating
   async image(public_id: string, url: string, poi: Poi){
@@ -157,5 +155,4 @@ export class PoiService{
     this.router.reset();
     this.au.setRoot(PLATFORM.moduleName(module));
   }
-
 }
