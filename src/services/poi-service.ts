@@ -1,17 +1,18 @@
-import {inject, Aurelia} from 'aurelia-framework';
+import { inject, Aurelia } from 'aurelia-framework';
 import { Router } from 'aurelia-router';
-import {PLATFORM } from 'aurelia-pal';
-import { Poi, Rating, Category,Image} from './poi-types';
-import {HttpClient} from 'aurelia-http-client';
-import {EventAggregator} from 'aurelia-event-aggregator'
+import { PLATFORM } from 'aurelia-pal';
+import { Poi, Rating, Category, Image, Location } from './poi-types';
+import { HttpClient } from 'aurelia-http-client';
+import { EventAggregator } from 'aurelia-event-aggregator'
 import { NumOfPoiUpdate } from './messages';
 
 @inject(HttpClient, EventAggregator, Aurelia, Router)
-export class PoiService{
-  pois: Poi[] =[];
+export class PoiService {
+  pois: Poi[] = [];
   ratings: Rating[] = [];
   categories: Category[] = [];
   images: Image[] = [];
+  Locations: Location[] = [];
   total = 0;
 
   constructor(private httpClient: HttpClient, private ea: EventAggregator, private au: Aurelia, private router: Router) {
@@ -20,14 +21,14 @@ export class PoiService{
     });
   }
 
-  async getCategories(){
+  async getCategories() {
     const response = await this.httpClient.get('/api/categories');
     this.categories = await response.content;
     console.log(this.categories);
   }
 
   // constructor of a new category
-  async category(name:string){
+  async category(name: string) {
     const category = {
       name: name
     }
@@ -37,34 +38,15 @@ export class PoiService{
     console.log(this.categories);
   }
 
-  // async getPois(){
-  //   const response = await this.httpClient.get('/api/pois');
-  //   const rawPois: RawPoi[] = await response.content;
-  //   rawPois.forEach(rawPoi => {
-  //     const poi = {
-  //       _id: "",
-  //       name: rawPoi.name,
-  //       category: this.categories.find(category => rawPoi.category == category._id),
-  //       description: rawPoi.description,
-  //       longitude: rawPoi.longitude,
-  //       latitude: rawPoi.latitude,
-  //       user: this.usersById.get(rawPoi.user)
-  //     }
-  //     this.pois.push(poi);
-  //     console.log(this.pois);
-  //   })
-  // }
-
   // Constructor of a new poi
-  async poi(name: string, category: Category, description: string, longitude: number, latitude: number){
+  async poi(name: string, category: Category, description: string, location: Location) {
     const poi = {
       name: name,
       category: category,
       description: description,
-      longitude: longitude,
-      latitude: latitude,
+      location: location
     }
-    const response = await this.httpClient.post('/api/categories/' +category._id+ '/pois', poi);
+    const response = await this.httpClient.post('/api/categories/' + category._id + '/pois', poi);
     this.pois.push(poi);
     this.total = this.total + 1;
     this.ea.publish(new NumOfPoiUpdate(this.total));
@@ -73,9 +55,9 @@ export class PoiService{
   }
 
   // constructor of a new rating
-  async rating(rate: number, review: string, poi: Poi){
+  async rating(rate: number, review: string, poi: Poi) {
     const rating = {
-      _id:'',
+      _id: '',
       rating: rate,
       review: review,
       poi: poi
@@ -84,16 +66,16 @@ export class PoiService{
     console.log(this.ratings);
   }
 
-  async getImages(){
+  async getImages() {
     const response = await this.httpClient.get('/api/images');
     this.images = await response.content;
     console.log(this.images);
   }
 
   // constructor of a new rating
-  async image(public_id: string, url: string, poi: Poi){
+  async image(public_id: string, url: string, poi: Poi) {
     const image = {
-      _id:'',
+      _id: '',
       public_id: public_id,
       url: url,
       poi: poi
@@ -155,7 +137,7 @@ export class PoiService{
     this.changeRouter(PLATFORM.moduleName('start'));
   }
 
-  changeRouter(module:string) {
+  changeRouter(module: string) {
     this.router.navigate('/', { replace: true, trigger: false });
     this.router.reset();
     this.au.setRoot(PLATFORM.moduleName(module));
