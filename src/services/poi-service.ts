@@ -40,11 +40,16 @@ export class PoiService {
 
   // Constructor of a new poi
   async poi(name: string, category: Category, description: string, location: Location) {
+
+    const locResponse = await this.httpClient.post('/api/locations', location);
+    const newLocation = await locResponse.content;
+    this.Locations.push(newLocation);
+
     const poi = {
       name: name,
       category: category,
       description: description,
-      location: location
+      location: newLocation._id
     }
     const response = await this.httpClient.post('/api/categories/' + category._id + '/pois', poi);
     this.pois.push(poi);
