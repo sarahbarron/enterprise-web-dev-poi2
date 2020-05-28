@@ -5,15 +5,15 @@ export interface Poi {
   latitude: number;
   category: Category;
 }
-
-export interface RawPoi {
-  name: string;
-  description: string;
-  longitude: number;
-  latitude: number;
-  category: string;
-  user: string;
-}
+//
+// export interface RawPoi {
+//   name: string;
+//   description: string;
+//   longitude: number;
+//   latitude: number;
+//   category: string;
+//   user: string;
+// }
 
 export interface Category {
   _id: string;
