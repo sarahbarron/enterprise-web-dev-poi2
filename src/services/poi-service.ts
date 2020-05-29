@@ -27,6 +27,7 @@ export class PoiService {
     console.log(this.categories);
   }
 
+
   // constructor of a new category
   async category(name: string) {
     const category = {
@@ -44,6 +45,7 @@ export class PoiService {
     this.locations = await response.content;
     console.log(this.locations);
   }
+
 
   // constructor of a new Location
   async location(lat: number, lng: number) {
@@ -75,6 +77,14 @@ export class PoiService {
     this.ea.publish(new messageUpdate(this.total, poi));
     console.log(this.pois);
     console.log(this.total);
+  }
+
+  // Get pois by user id
+  async getPoisByUser()
+  {
+    const response = await this.httpClient.get('/api/pois/user');
+    this.pois = await response.content;
+    console.log(this.pois);
   }
 
   // constructor of a new rating
@@ -143,6 +153,7 @@ export class PoiService {
         });
         localStorage.poi = JSON.stringify(response.content)
         await this.getCategories();
+        await this.getPoisByUser();
         this.changeRouter(PLATFORM.moduleName('app'));
         success = status.success;
       }
