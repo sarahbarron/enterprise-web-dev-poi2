@@ -43,7 +43,7 @@ export class PoiService {
 
     let response = await this.httpClient.post('/api/locations', location);
     const newLocation = await response.content;
-    this.Locations.push(newLocation);
+    this.Locations.push(location);
 
     const poi = {
       name: name,

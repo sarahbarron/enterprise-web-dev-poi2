@@ -1,8 +1,56 @@
 {
    "8/RrMmQlCD2Gsp14wUCE1P8r7B2C5+yE0+g79IPyRsc=": {
-      "expiry": 1622247940.697588,
+      "expiry": 1622252108.666275,
       "mode": "force-https",
       "sts_include_subdomains": false,
-      "sts_observed": 1590711940.697594
+      "sts_observed": 1590716108.666316
+   },
+   "E10e7Gwg5+phsYD4E8qNYFsQySXnIHPAfo4zloUPESc=": {
+      "expect_ct": {
+         "expect_ct_enforce": false,
+         "expect_ct_expiry": 1591320927.405938,
+         "expect_ct_observed": 1590716127.405938,
+         "expect_ct_report_uri": "https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      },
+      "expiry": 1606496127.405933,
+      "mode": "force-https",
+      "sts_include_subdomains": true,
+      "sts_observed": 1590716127.405935
+   },
+   "Vtym4AmX8lwQhhwXjS9cn9uELz5WXyjLvyIFqEpZK4E=": {
+      "expiry": 1622252127.704982,
+      "mode": "force-https",
+      "sts_include_subdomains": true,
+      "sts_observed": 1590716127.704984
+   },
+   "WhqEZy32FMwe1ronN0HIGTBRIsyBrAVh+UCLhgFuktc=": {
+      "expiry": 1622252127.602889,
+      "mode": "force-https",
+      "sts_include_subdomains": true,
+      "sts_observed": 1590716127.602891
+   },
+   "nAuqgR4iEWti7SOdT3UHPl6rmZU/DeaIm38P2O2OkgA=": {
+      "expiry": 1622252109.220795,
+      "mode": "force-https",
+      "sts_include_subdomains": false,
+      "sts_observed": 1590716109.220798
+   },
+   "qaDeFdT1UTirY0OQe+c5LKw+zjx6vF/+3vFh7CgrAOY=": {
+      "expect_ct": {
+         "expect_ct_enforce": false,
+         "expect_ct_expiry": 1591320927.603137,
+         "expect_ct_observed": 1590716127.603137,
+         "expect_ct_report_uri": "https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      },
+      "expiry": 1622252127.60313,
+      "mode": "force-https",
+      "sts_include_subdomains": true,
+      "sts_observed": 1590716127.603132
+   },
+   "zPgYPT27LcOliBROU4VQO4/OGRLdHIzsGKB03xN4lNs=": {
+      "expiry": 1622252127.705378,
+      "mode": "force-https",
+      "sts_include_subdomains": true,
+      "sts_observed": 1590716127.705381
    }
 }

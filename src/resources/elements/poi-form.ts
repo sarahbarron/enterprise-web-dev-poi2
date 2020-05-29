@@ -5,10 +5,8 @@ import { PoiService } from '../../services/poi-service';
 @inject(PoiService)
 export class PoiForm {
 
-  @bindable
-  pois: Poi[];
-  @bindable
-  categories: Category[];
+  @bindable pois: Poi[];
+  @bindable categories: Category[];
 
   name: string;
   description: string;
