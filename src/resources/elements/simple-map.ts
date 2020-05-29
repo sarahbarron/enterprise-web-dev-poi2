@@ -3,7 +3,7 @@ import { inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { LeafletMap } from '../../services/leaflet-map';
 import { messageUpdate } from '../../services/messages';
-
+import {PoiService} from '../../services/poi-service';
 
 @inject(EventAggregator)
 export class SimpleMap {
@@ -11,11 +11,13 @@ export class SimpleMap {
   mapHeight = 300;
   map: LeafletMap;
 
+
   constructor(private ea: EventAggregator) {
     ea.subscribe(messageUpdate, (msg) => {
       this.renderPoi(msg.poi);
     });
   }
+
 
   renderPoi(poi: Poi) {
     if (this.map) {
@@ -28,8 +30,8 @@ export class SimpleMap {
 
   attached() {
     const mapConfig = {
-      location: { lat: 53.2734, lng: -7.7783203 },
-      zoom: 8,
+      location: { _id:'', lat: 53.2734, lng: -7.7783203 },
+      zoom: 7,
       minZoom: 7,
     };
     this.map = new LeafletMap(this.mapId, mapConfig, 'Terrain');

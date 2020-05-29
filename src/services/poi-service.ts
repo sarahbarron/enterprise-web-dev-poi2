@@ -12,7 +12,7 @@ export class PoiService {
   ratings: Rating[] = [];
   categories: Category[] = [];
   images: Image[] = [];
-  Locations: Location[] = [];
+  locations: Location[] = [];
   total = 0;
 
   constructor(private httpClient: HttpClient, private ea: EventAggregator, private au: Aurelia, private router: Router) {
@@ -38,24 +38,42 @@ export class PoiService {
     console.log(this.categories);
   }
 
-  // Constructor of a new poi
-  async poi(name: string, category: Category, description: string, location: Location) {
+  // get locations
+  async getLocations() {
+    const response = await this.httpClient.get('/api/locations');
+    this.locations = await response.content;
+    console.log(this.locations);
+  }
 
-    let response = await this.httpClient.post('/api/locations', location);
+  // constructor of a new Location
+  async location(lat: number, lng: number) {
+    const location = {
+      lat: lat,
+      lng: lng
+    }
+    const response = await this.httpClient.post('/api/locations', location);
     const newLocation = await response.content;
-    this.Locations.push(location);
+    this.locations.push(newLocation);
+    console.log(this.locations);
+    return(newLocation)
+  }
+
+  // Constructor of a new poi
+  async poi(name: string, category: Category, description: string, location : Location) {
+
+    const newLocation = await this.location(location.lat, location.lng);
 
     const poi = {
       name: name,
       category: category,
       description: description,
-      location: location
+      location : location
     }
-    response = await this.httpClient.post('/api/categories/' + category._id + '/locations/' + newLocation._id + '/pois', poi);
+    const response = await this.httpClient.post('/api/categories/' + category._id + '/locations/' + newLocation._id + '/pois', poi);
     this.pois.push(poi);
     this.total = this.total + 1;
     this.ea.publish(new messageUpdate(this.total, poi));
-    console.log(this.poi);
+    console.log(this.pois);
     console.log(this.total);
   }
 

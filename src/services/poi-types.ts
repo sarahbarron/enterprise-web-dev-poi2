@@ -12,6 +12,7 @@ export interface Category {
 }
 
 export interface Location {
+  _id: string;
   lat: number;
   lng: number;
 }
