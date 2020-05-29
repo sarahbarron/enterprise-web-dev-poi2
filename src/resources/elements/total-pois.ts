@@ -1,16 +1,16 @@
-import {inject, bindable} from 'aurelia-framework';
-import {PoiService} from '../../services/poi-service';
-import {NumOfPoiUpdate} from '../../services/messages';
-import {EventAggregator} from 'aurelia-event-aggregator';
+import { inject, bindable } from 'aurelia-framework';
+import { PoiService } from '../../services/poi-service';
+import { messageUpdate } from '../../services/messages';
+import { EventAggregator } from 'aurelia-event-aggregator';
 
 @inject(PoiService, EventAggregator)
-export class TotalPois{
+export class TotalPois {
   @bindable
   total = 0;
 
   constructor(private ps: PoiService, private ea: EventAggregator) {
     this.total = ps.total;
-    ea.subscribe(NumOfPoiUpdate, msg => {
+    ea.subscribe(messageUpdate, msg => {
       this.total = msg.total;
     });
   }

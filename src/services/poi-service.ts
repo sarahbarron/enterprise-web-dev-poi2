@@ -4,7 +4,7 @@ import { PLATFORM } from 'aurelia-pal';
 import { Poi, Rating, Category, Image, Location } from './poi-types';
 import { HttpClient } from 'aurelia-http-client';
 import { EventAggregator } from 'aurelia-event-aggregator'
-import { NumOfPoiUpdate } from './messages';
+import { messageUpdate } from './messages';
 
 @inject(HttpClient, EventAggregator, Aurelia, Router)
 export class PoiService {
@@ -41,20 +41,20 @@ export class PoiService {
   // Constructor of a new poi
   async poi(name: string, category: Category, description: string, location: Location) {
 
-    const locResponse = await this.httpClient.post('/api/locations', location);
-    const newLocation = await locResponse.content;
+    let response = await this.httpClient.post('/api/locations', location);
+    const newLocation = await response.content;
     this.Locations.push(newLocation);
 
     const poi = {
       name: name,
       category: category,
       description: description,
-      location: newLocation._id
+      location: location
     }
-    const response = await this.httpClient.post('/api/categories/' + category._id + '/pois', poi);
+    response = await this.httpClient.post('/api/categories/' + category._id + '/locations/' + newLocation._id + '/pois', poi);
     this.pois.push(poi);
     this.total = this.total + 1;
-    this.ea.publish(new NumOfPoiUpdate(this.total));
+    this.ea.publish(new messageUpdate(this.total, poi));
     console.log(this.poi);
     console.log(this.total);
   }
