@@ -1,27 +1,24 @@
 export interface Poi {
   name: string;
   description: string;
-  longitude: number;
-  latitude: number;
+  location: Location;
   category: Category;
 }
-//
-// export interface RawPoi {
-//   name: string;
-//   description: string;
-//   longitude: number;
-//   latitude: number;
-//   category: string;
-//   user: string;
-// }
+
 
 export interface Category {
   _id: string;
   name: string;
 }
 
+export interface Location {
+  _id: string;
+  lat: number;
+  lng: number;
+}
+
 export interface User {
-  _id:string;
+  _id: string;
   firstName: string;
   lastName: string;
   email: string;

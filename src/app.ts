@@ -14,6 +14,13 @@ export class App {
         title: 'Pois'
       },
       {
+        route: 'map',
+        name: 'map',
+        moduleId: PLATFORM.moduleName('views/map'),
+        nav: true,
+        title: 'Map'
+      },
+      {
         route:['rating'],
         name: 'rating',
         moduleId: PLATFORM.moduleName('views/ratings'),

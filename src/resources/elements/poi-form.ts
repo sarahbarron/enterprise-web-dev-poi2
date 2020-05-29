@@ -1,26 +1,23 @@
 import { bindable, inject } from 'aurelia-framework';
-import { Poi, Category, User } from '../../services/poi-types';
+import { Poi, Category, Location } from '../../services/poi-types';
 import { PoiService } from '../../services/poi-service';
 
 @inject(PoiService)
 export class PoiForm {
 
+  // @bindable pois: Poi[];
+  @bindable categories: Category[];
+
   name: string;
   description: string;
-  longitude: number;
-  latitude: number;
-
-
-  @bindable
-  pois: Poi[];
-  @bindable
-  categories: Category[];
   selectedCategory: Category = null;
+  location: Location = { _id:'', lat: 53.2734, lng: -7.7783203 };
 
-  constructor(private ps:PoiService) {}
+  constructor(private ps: PoiService) {}
 
   addPoi() {
-    this.ps.poi(this.name, this.selectedCategory, this.description, this.longitude, this.latitude);
+    console.log("location: " + this.location);
+    this.ps.poi(this.name, this.selectedCategory, this.description, this.location);
   }
 
 }
