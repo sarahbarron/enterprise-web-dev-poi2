@@ -1,0 +1,34 @@
+<template>
+  <h4 class="ui dividing header"> Points Of Interest </h4>
+  <table class="ui fixed table segment">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr repeat.for="poi of pois">
+        <td>
+          ${poi.name}
+        <td>
+          ${poi.category.name}
+        </td>
+        <td>
+          <a href="#" class="ui icon button"><i class="eye teal icon"></i></a>
+        </td>
+        <td>
+          <a href="#" class="ui icon button">
+            <i class="icon red trash"></i>
+          </a>
+        </td>
+        <td>
+          <a href="#" class="ui icon button">Update</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</template>
