@@ -12,9 +12,4 @@ export class messageUpdate {
   }
 }
 
-export class singlePoiMessage{
-  singlePoi: Poi;
-  constructor(singlePoi: Poi) {
-    this.singlePoi = singlePoi
-  }
-}
+

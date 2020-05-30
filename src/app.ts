@@ -15,7 +15,7 @@ export class App {
         title: 'Pois'
       },
       {
-        route: ['singlepoi'],
+        route: 'singlepoi',
         name: 'singlepoi',
         moduleId: PLATFORM.moduleName('views/singlepois'),
         nav: false,

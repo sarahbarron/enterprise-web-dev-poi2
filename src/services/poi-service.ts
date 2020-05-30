@@ -4,7 +4,7 @@ import { PLATFORM } from 'aurelia-pal';
 import { Poi, Rating, Category, Image, Location } from './poi-types';
 import { HttpClient } from 'aurelia-http-client';
 import { EventAggregator } from 'aurelia-event-aggregator'
-import { messageUpdate, singlePoiMessage } from './messages';
+import { messageUpdate} from './messages';
 
 /*
 * Service Class for the Point of Interest project
@@ -26,11 +26,13 @@ export class PoiService {
     });
   }
 
-
   async setSinglePoi(id){
     const response = await this.httpClient.get('/api/pois/'+id);
     this.singlePoi = response.content;
-    this.ea.publish(new singlePoiMessage(this.singlePoi));
+  }
+
+  async resetSinglePoi(){
+    this.singlePoi = null;
   }
   // Get all categories
   async getCategories() {

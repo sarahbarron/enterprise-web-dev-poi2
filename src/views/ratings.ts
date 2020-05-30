@@ -8,8 +8,9 @@ export class Ratings{
     ratings: Rating[];
     pois: Poi[];
 
-    constructor(private rts: PoiService) {
-      this.pois = rts.pois;
-      this.ratings = rts.ratings;
+    constructor(private ps: PoiService) {
+      this.pois = ps.pois;
+      this.ratings = ps.ratings;
+      ps.singlePoi = null;
     }
 }

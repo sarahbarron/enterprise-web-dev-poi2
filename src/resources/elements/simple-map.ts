@@ -1,28 +1,31 @@
 import { Poi } from './../../services/poi-types';
-import { inject } from 'aurelia-framework';
+import { inject,bindable } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { LeafletMap } from '../../services/leaflet-map';
-import { messageUpdate, singlePoiMessage } from '../../services/messages';
+import { messageUpdate} from '../../services/messages';
+import { PoiService } from '../../services/poi-service';
 
 
 /*
 * Modal Class for the simple map on the create poi page
 * */
-@inject(EventAggregator)
+@inject(EventAggregator, PoiService)
 export class SimpleMap {
   mapId = 'simple-map';
   mapHeight = 300;
   map: LeafletMap;
 
+  @bindable singlePoi;
 
   // subscription to an event to add a poi marker to the make when a poi is created.
-  constructor(private ea: EventAggregator) {
+  constructor(private ea: EventAggregator, private ps: PoiService) {
+
     ea.subscribe(messageUpdate, (msg) => {
       this.renderPoi(msg.poi);
     });
-    ea.subscribe(singlePoiMessage, (msg) =>{
-      this.renderPoi(msg.singlePoi);
-    })
+
+    this.singlePoi = this.ps.singlePoi;
+
   }
 
   // Add a marker on the map for each location
@@ -43,5 +46,11 @@ export class SimpleMap {
     };
     this.map = new LeafletMap(this.mapId, mapConfig, 'Terrain');
     this.map.showZoomControl();
+
+    if(this.singlePoi != null)
+    {
+      this.renderPoi(this.singlePoi);
+    }
+
   }
 }
