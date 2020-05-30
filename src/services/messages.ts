@@ -11,3 +11,5 @@ export class messageUpdate {
     this.poi = poi;
   }
 }
+
+

@@ -14,6 +14,7 @@ export class Pois {
     this.pois = ps.pois;
     this.categories = ps.categories;
     this.total = ps.total;
+    this.ps.singlePoi =null;
   }
 
 }

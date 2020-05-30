@@ -1,0 +1,30 @@
+<template>
+  <table class="ui very basic collapsing celled table">
+    <thead>
+    <tr><th class="single line">Category</th>
+      <th>${singlePoi.category.name}</th>
+    </tr></thead>
+    <tbody>
+    <tr>
+      <td>Name: </td><td> ${singlePoi.name}</td>
+    </tr>
+    <tr>
+      <td>Location: </td><td> ${singlePoi.location.lat} , ${singlePoi.location.lng}</td>
+    </tr>
+    </tbody>
+  </table>
+  <div>
+    <table class="ui very basic collapsing celled table">
+      <thead>
+      <tr><th class="single line">Description</th>
+      </tr></thead>
+      <tbody>
+      <tr>
+        <td> ${singlePoi.description}</td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+</template>

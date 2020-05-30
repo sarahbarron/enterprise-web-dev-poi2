@@ -22,6 +22,5 @@ export class PoiForm {
   addPoi() {
     this.ps.poi(this.name, this.selectedCategory, this.description, this.location);
   }
-
 }
 

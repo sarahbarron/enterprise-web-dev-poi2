@@ -1,0 +1,22 @@
+<template>
+<!--  Requirements -->
+  <require from="../resources/elements/simple-map"></require>
+  <require from="../resources/elements/single-poi"></require>
+
+
+<!--  elements added -->
+  <div class="ui container">
+
+      <div class="ui stackable grid">
+      <div class="eight wide column">
+        <single-poi singlePoi.bind="singlePoi"></single-poi>
+      </div>
+      <div class="eight wide column">
+        <simple-map singlePoi.bind="singlePoi"></simple-map>
+        <div class="ui hidden divider"></div>
+      </div>
+<!--      Div with Description here-->
+<!--      Div with Images to go here-->
+    </div>
+  </div>
+</template>
