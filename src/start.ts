@@ -3,6 +3,7 @@ import { RouterConfiguration, Router } from 'aurelia-router';
 import { PLATFORM } from 'aurelia-pal';
 import { PoiService } from './services/poi-service';
 
+// Router for an unauthenticated user
 @inject(PoiService)
 export class Start {
   router: Router;

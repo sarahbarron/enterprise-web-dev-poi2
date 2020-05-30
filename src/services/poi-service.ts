@@ -6,6 +6,9 @@ import { HttpClient } from 'aurelia-http-client';
 import { EventAggregator } from 'aurelia-event-aggregator'
 import { messageUpdate } from './messages';
 
+/*
+* Service Class for the Point of Interest project
+* */
 @inject(HttpClient, EventAggregator, Aurelia, Router)
 export class PoiService {
   pois: Poi[] = [];
@@ -15,12 +18,14 @@ export class PoiService {
   locations: Location[] = [];
   total = 0;
 
+  // Constructor method
   constructor(private httpClient: HttpClient, private ea: EventAggregator, private au: Aurelia, private router: Router) {
     httpClient.configure((http) => {
       http.withBaseUrl('http://localhost:3000');
     });
   }
 
+  // Get all categories
   async getCategories() {
     const response = await this.httpClient.get('/api/categories');
     this.categories = await response.content;
@@ -39,14 +44,6 @@ export class PoiService {
     console.log(this.categories);
   }
 
-  // get locations
-  async getLocations() {
-    const response = await this.httpClient.get('/api/locations');
-    this.locations = await response.content;
-    console.log(this.locations);
-  }
-
-
   // constructor of a new Location
   async location(lat: number, lng: number) {
     const location = {
@@ -60,7 +57,7 @@ export class PoiService {
     return(newLocation)
   }
 
-  // Constructor of a new poi
+   // Constructor of a new poi
   async poi(name: string, category: Category, description: string, location : Location) {
 
     const newLocation = await this.location(location.lat, location.lng);
@@ -99,6 +96,7 @@ export class PoiService {
     console.log(this.ratings);
   }
 
+  // Get images
   async getImages() {
     const response = await this.httpClient.get('/api/images');
     this.images = await response.content;
@@ -117,6 +115,7 @@ export class PoiService {
     console.log(this.image);
   }
 
+  // Check if user is already authenticated prior to asking the user to login or signup
   checkIsAuthenticated() {
     let authenticated = false;
     if (localStorage.poi !== 'null') {
@@ -129,6 +128,7 @@ export class PoiService {
     }
   }
 
+  // Method for signing up
   async signup(firstName: string, lastName: string, email: string, password: string) {
     const user = {
       firstName: firstName,
@@ -138,10 +138,12 @@ export class PoiService {
     };
     const response = await this.httpClient.post('/api/users', user);
     const newUser = await response.content;
+    await this.getCategories();
     this.changeRouter(PLATFORM.moduleName('app'))
     return false;
   }
 
+  // Method for login
   async login(email: string, password: string) {
     let success = false;
     try {
@@ -163,6 +165,7 @@ export class PoiService {
     return success;
   }
 
+  // Method for logout
   logout() {
     localStorage.poi = null;
     this.httpClient.configure(configuration => {
@@ -171,6 +174,7 @@ export class PoiService {
     this.changeRouter(PLATFORM.moduleName('start'));
   }
 
+  // Change the router depending on the user type
   changeRouter(module: string) {
     this.router.navigate('/', { replace: true, trigger: false });
     this.router.reset();

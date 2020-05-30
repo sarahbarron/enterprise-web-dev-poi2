@@ -1,6 +1,7 @@
 import { RouterConfiguration, Router } from 'aurelia-router';
 import { PLATFORM } from 'aurelia-pal';
 
+// Router for an authenticated user
 export class App {
   router: Router;
 

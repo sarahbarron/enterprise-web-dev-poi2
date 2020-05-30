@@ -6,6 +6,9 @@ import LayerGroup = L.LayerGroup;
 import LayerControl = L.Control.Layers;
 import { Location } from './poi-types';
 
+/*
+* Leaflet Map classes needed for maps
+* */
 export interface MapConfig {
   location: Location;
   zoom: number;

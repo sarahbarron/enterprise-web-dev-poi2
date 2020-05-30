@@ -3,6 +3,9 @@ import { PoiService } from '../../services/poi-service';
 import { messageUpdate } from '../../services/messages';
 import { EventAggregator } from 'aurelia-event-aggregator';
 
+/*
+* Modal Class for the total number of pois created by the user during the session
+* */
 @inject(PoiService, EventAggregator)
 export class TotalPois {
   @bindable

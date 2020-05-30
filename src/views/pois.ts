@@ -2,6 +2,7 @@ import { inject } from 'aurelia-framework';
 import { Poi, Category } from '../services/poi-types';
 import { PoiService} from '../services/poi-service';
 
+/* Point of Service modal class*/
 @inject(PoiService)
 export class Pois {
 

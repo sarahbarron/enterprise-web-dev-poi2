@@ -1,6 +1,8 @@
 import { inject } from 'aurelia-framework';
 import { PoiService } from '../services/poi-service';
 
+
+/* Login modal class*/
 @inject(PoiService)
 export class Login {
   email = 'marge@simpson.com';

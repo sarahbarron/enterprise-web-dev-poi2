@@ -1,6 +1,7 @@
 import { inject } from 'aurelia-framework';
 import { PoiService } from '../services/poi-service';
 
+/*Signup modal class*/
 @inject(PoiService)
 export class Signup {
   firstName = 'Marge';

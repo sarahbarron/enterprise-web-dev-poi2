@@ -3,8 +3,11 @@ import { inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { LeafletMap } from '../../services/leaflet-map';
 import { messageUpdate } from '../../services/messages';
-import {PoiService} from '../../services/poi-service';
 
+
+/*
+* Modal Class for the simple map on the create poi page
+* */
 @inject(EventAggregator)
 export class SimpleMap {
   mapId = 'simple-map';
@@ -12,13 +15,14 @@ export class SimpleMap {
   map: LeafletMap;
 
 
+  // subscription to an event to add a poi marker to the make when a poi is created.
   constructor(private ea: EventAggregator) {
     ea.subscribe(messageUpdate, (msg) => {
       this.renderPoi(msg.poi);
     });
   }
 
-
+  // Retrieve all pois and add a marker on the map for each location
   renderPoi(poi: Poi) {
     if (this.map) {
       const poiStr = `${poi.category.name} ${poi.name} `;
@@ -27,7 +31,7 @@ export class SimpleMap {
     }
   }
 
-
+  // Initial map setup and view
   attached() {
     const mapConfig = {
       location: { _id:'', lat: 53.2734, lng: -7.7783203 },

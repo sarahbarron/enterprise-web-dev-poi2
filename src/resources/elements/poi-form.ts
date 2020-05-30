@@ -2,6 +2,9 @@ import { bindable, inject } from 'aurelia-framework';
 import { Poi, Category, Location } from '../../services/poi-types';
 import { PoiService } from '../../services/poi-service';
 
+/*
+* Class for the poi form input to add a poi to a users account
+* */
 @inject(PoiService)
 export class PoiForm {
 
@@ -15,8 +18,8 @@ export class PoiForm {
 
   constructor(private ps: PoiService) {}
 
+  // Method to add the poi
   addPoi() {
-    console.log("location: " + this.location);
     this.ps.poi(this.name, this.selectedCategory, this.description, this.location);
   }
 

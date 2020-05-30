@@ -1,5 +1,8 @@
 import { Poi } from './poi-types';
 
+/*
+* Message for publishing an event, published each time there is a poi added
+* */
 export class messageUpdate {
   total: number;
   poi: Poi;
