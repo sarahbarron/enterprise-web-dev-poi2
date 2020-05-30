@@ -11,3 +11,10 @@ export class messageUpdate {
     this.poi = poi;
   }
 }
+
+export class singlePoiMessage{
+  singlePoi: Poi;
+  constructor(singlePoi: Poi) {
+    this.singlePoi = singlePoi
+  }
+}

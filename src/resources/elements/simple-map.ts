@@ -2,7 +2,7 @@ import { Poi } from './../../services/poi-types';
 import { inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { LeafletMap } from '../../services/leaflet-map';
-import { messageUpdate } from '../../services/messages';
+import { messageUpdate, singlePoiMessage } from '../../services/messages';
 
 
 /*
@@ -20,9 +20,12 @@ export class SimpleMap {
     ea.subscribe(messageUpdate, (msg) => {
       this.renderPoi(msg.poi);
     });
+    ea.subscribe(singlePoiMessage, (msg) =>{
+      this.renderPoi(msg.singlePoi);
+    })
   }
 
-  // Retrieve all pois and add a marker on the map for each location
+  // Add a marker on the map for each location
   renderPoi(poi: Poi) {
     if (this.map) {
       const poiStr = `${poi.category.name} ${poi.name} `;
