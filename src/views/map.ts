@@ -1,26 +1,31 @@
-import * as L from "leaflet";
-import Map = L.Map;
 import { LeafletMap } from '../services/leaflet-map';
 import { PoiService } from '../services/poi-service';
 import { inject } from 'aurelia-framework';
+import { Poi } from '../services/poi-types';
 
 /* Map Modal Class - for map on the full page*/
 @inject(PoiService)
 export class Map {
   mapId = 'main-map';
-  mapHeight = 900;
+  mapHeight = 600;
   map: LeafletMap;
+  pois: Poi[];
+
 
   constructor(private ds: PoiService) { }
 
-  // Render all points of interest and retrieve their location to place a marker on the map
-  renderPois() {
+  // Render all points of interest and retrieve their loction to place a marker on the map
+  renderPois(link:boolean = true) {
     for (let poi of this.ds.pois) {
-      console.log(poi.location);
-      const poiStr = `${poi.category.name} ${poi.name}`;
+      const poiStr = link
+        ? `<a href='/singlepoi/${poi._id}'>${poi.category.name}<br>${poi.name} <small>(click for details}</small></a>`
+        : poi.name;
+        // `${poi.category.name} ${poi.name}`;
       this.map.addMarker(poi.location, poiStr, 'POI');
+
     }
   }
+
 
   // setup of the map
   attached() {

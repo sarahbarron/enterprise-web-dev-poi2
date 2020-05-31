@@ -1,5 +1,6 @@
 // Point of Interest Type
 export interface Poi {
+  _id: string;
   name: string;
   description: string;
   location: Location;
