@@ -10,7 +10,6 @@ export class PoiForm {
 
   // @bindable pois: Poi[];
   @bindable categories: Category[];
-
   name: string;
   description: string;
   selectedCategory: Category = null;

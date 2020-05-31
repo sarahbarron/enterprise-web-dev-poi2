@@ -1,11 +1,7 @@
-import * as L from "leaflet";
-import Map = L.Map;
 import { LeafletMap } from '../services/leaflet-map';
 import { PoiService } from '../services/poi-service';
 import { inject } from 'aurelia-framework';
-import { link } from 'fs';
-import { Category } from '../services/poi-types';
-import {Poi} from '../services/poi-types';
+import { Poi } from '../services/poi-types';
 
 /* Map Modal Class - for map on the full page*/
 @inject(PoiService)
@@ -13,8 +9,8 @@ export class Map {
   mapId = 'main-map';
   mapHeight = 600;
   map: LeafletMap;
+  pois: Poi[];
 
-  poi: Poi;
 
   constructor(private ds: PoiService) { }
 
@@ -22,7 +18,7 @@ export class Map {
   renderPois(link:boolean = true) {
     for (let poi of this.ds.pois) {
       const poiStr = link
-        ? `<a href='/poi/${poi.name}'>${poi.name} <small>(click for details}</small></a>`
+        ? `<a href='/singlepoi/${poi._id}'>${poi.category.name}<br>${poi.name} <small>(click for details}</small></a>`
         : poi.name;
         // `${poi.category.name} ${poi.name}`;
       this.map.addMarker(poi.location, poiStr, 'POI');

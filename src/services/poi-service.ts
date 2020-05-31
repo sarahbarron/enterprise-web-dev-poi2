@@ -82,10 +82,18 @@ export class PoiService {
       description: description,
       location: location
     }
+
     const response = await this.httpClient.post('/api/categories/' + category._id + '/locations/' + newLocation._id + '/pois', poi);
-    this.pois.push(poi);
+    const newPoi = {
+      _id: response.content._id,
+      name:name,
+      category: category,
+      description: description,
+      location: location
+    }
+    this.pois.push(newPoi);
     this.total = this.total + 1;
-    this.ea.publish(new messageUpdate(this.total, poi));
+    this.ea.publish(new messageUpdate(this.total, newPoi));
     console.log(this.pois);
     console.log(this.total);
   }

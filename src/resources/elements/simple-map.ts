@@ -12,7 +12,7 @@ import { PoiService } from '../../services/poi-service';
 @inject(EventAggregator, PoiService)
 export class SimpleMap {
   mapId = 'simple-map';
-  mapHeight = 300;
+  mapHeight = 500;
   map: LeafletMap;
 
   @bindable singlePoi;

@@ -15,17 +15,17 @@ export class App {
         name: 'map',
         moduleId: PLATFORM.moduleName('views/map'),
         nav: true,
-        title: 'Map'
+        title: 'All Pois'
       },
       {
         route: 'pois',
         name: 'pois',
         moduleId: PLATFORM.moduleName('views/pois'),
         nav: true,
-        title: 'Add Pois'
+        title: 'Manage Pois'
       },
       {
-        route: 'singlepoi',
+        route: 'singlepoi/:id',
         name: 'singlepoi',
         moduleId: PLATFORM.moduleName('views/singlepois'),
         nav: false,
