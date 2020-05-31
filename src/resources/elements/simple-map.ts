@@ -1,8 +1,8 @@
 import { Poi } from './../../services/poi-types';
-import { inject,bindable } from 'aurelia-framework';
+import { inject, bindable } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { LeafletMap } from '../../services/leaflet-map';
-import { messageUpdate} from '../../services/messages';
+import { messageUpdate } from '../../services/messages';
 import { PoiService } from '../../services/poi-service';
 
 
@@ -40,15 +40,14 @@ export class SimpleMap {
   // Initial map setup and view
   attached() {
     const mapConfig = {
-      location: { _id:'', lat: 53.2734, lng: -7.7783203 },
+      location: { _id: '', lat: 52.865196, lng: -7.97946 },
       zoom: 7,
       minZoom: 7,
     };
     this.map = new LeafletMap(this.mapId, mapConfig, 'Terrain');
     this.map.showZoomControl();
 
-    if(this.singlePoi != null)
-    {
+    if (this.singlePoi != null) {
       this.renderPoi(this.singlePoi);
     }
 

@@ -6,13 +6,23 @@ export class App {
   router: Router;
 
   configureRouter(config: RouterConfiguration, router: Router) {
+    config.title = "Poi";
+    config.options.pushState = true;
+
     config.map([
       {
-        route: ['', 'pois'],
+        route: ['', 'map'],
+        name: 'map',
+        moduleId: PLATFORM.moduleName('views/map'),
+        nav: true,
+        title: 'Map'
+      },
+      {
+        route: 'pois',
         name: 'pois',
         moduleId: PLATFORM.moduleName('views/pois'),
         nav: true,
-        title: 'Pois'
+        title: 'Add Pois'
       },
       {
         route: 'singlepoi',
@@ -22,21 +32,14 @@ export class App {
         title: 'Poi'
       },
       {
-        route: 'map',
-        name: 'map',
-        moduleId: PLATFORM.moduleName('views/map'),
-        nav: true,
-        title: 'Map'
-      },
-      {
-        route:['rating'],
+        route: ['rating'],
         name: 'rating',
         moduleId: PLATFORM.moduleName('views/ratings'),
         nav: true,
         title: 'Rating'
       },
       {
-        route:['categories'],
+        route: ['categories'],
         name: 'categories',
         moduleId: PLATFORM.moduleName(('views/categories')),
         nav: true,

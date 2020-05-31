@@ -21,9 +21,9 @@
           <a route-href="route: singlepoi; params.bind: { id: poi._id }" class="ui icon button"><i class="eye teal icon"></i></a>
         </td>
         <td>
-          <a href="#" class="ui icon button">
+          <button click.trigger="deletePoi(poi._id)" class="ui icon button">
             <i class="icon red trash"></i>
-          </a>
+          </button>
         </td>
         <td>
           <a href="#" class="ui icon button">Update</a>
