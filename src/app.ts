@@ -11,7 +11,7 @@ export class App {
 
     config.map([
       {
-        route: ['', 'map'],
+        route: ['','map'],
         name: 'map',
         moduleId: PLATFORM.moduleName('views/map'),
         nav: true,
