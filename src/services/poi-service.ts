@@ -1,10 +1,11 @@
+import { LeafletMap } from './leaflet-map';
 import { inject, Aurelia } from 'aurelia-framework';
 import { Router } from 'aurelia-router';
 import { PLATFORM } from 'aurelia-pal';
 import { Poi, Rating, Category, Image, Location } from './poi-types';
 import { HttpClient } from 'aurelia-http-client';
 import { EventAggregator } from 'aurelia-event-aggregator'
-import { messageUpdate} from './messages';
+import { messageUpdate } from './messages';
 
 /*
 * Service Class for the Point of Interest project
@@ -26,12 +27,16 @@ export class PoiService {
     });
   }
 
-  async setSinglePoi(id){
-    const response = await this.httpClient.get('/api/pois/'+id);
+  async deletePoi(id) {
+    console.log(id);
+    const response = await this.httpClient.delete('/api/pois/' + id);
+  }
+  async setSinglePoi(id) {
+    const response = await this.httpClient.get('/api/pois/' + id);
     this.singlePoi = response.content;
   }
 
-  async resetSinglePoi(){
+  async resetSinglePoi() {
     this.singlePoi = null;
   }
   // Get all categories
@@ -63,11 +68,11 @@ export class PoiService {
     const newLocation = await response.content;
     this.locations.push(newLocation);
     console.log(this.locations);
-    return(newLocation)
+    return (newLocation)
   }
 
-   // Constructor of a new poi
-  async poi(name: string, category: Category, description: string, location : Location) {
+  // Constructor of a new poi
+  async poi(name: string, category: Category, description: string, location: Location) {
 
     const newLocation = await this.location(location.lat, location.lng);
 
@@ -75,7 +80,7 @@ export class PoiService {
       name: name,
       category: category,
       description: description,
-      location : location
+      location: location
     }
     const response = await this.httpClient.post('/api/categories/' + category._id + '/locations/' + newLocation._id + '/pois', poi);
     this.pois.push(poi);
@@ -86,8 +91,7 @@ export class PoiService {
   }
 
   // Get pois by user id
-  async getPoisByUser()
-  {
+  async getPoisByUser() {
     const response = await this.httpClient.get('/api/pois/user');
     this.pois = await response.content;
     console.log(this.pois);
