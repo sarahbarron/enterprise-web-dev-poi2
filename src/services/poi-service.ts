@@ -67,9 +67,7 @@ export class PoiService {
       poi_id: poi_id
     }
     const response = await this.httpClient.post('/api/pois/addimage',addImage);
-    this.singlePoi = response;
-    await this.getPoisByUser();
-    console.log(this.singlePoi);
+    return response;
   }
 
   async deletePoi(id) {
@@ -79,8 +77,9 @@ export class PoiService {
     await this.deletePoiInPoisArray(index);
   }
   async setSinglePoi(id) {
-    const response = await this.httpClient.get('/api/pois/' + id);
-    this.singlePoi = response.content;
+    const index = this.findPoiInPoisIndex(id);
+    this.singlePoi = this.pois[index];
+    console.log("single POI: "+this.singlePoi);
   }
 
   async resetSinglePoi() {
@@ -253,8 +252,13 @@ export class PoiService {
     }
   }
 
+
   deletePoiInPoisArray(index){
     this.pois = this.pois.splice(index,1);
+    console.log("Deleted @ index: "+index);
   }
+
 }
+
+
 

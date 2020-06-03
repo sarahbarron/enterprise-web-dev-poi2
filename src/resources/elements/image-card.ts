@@ -8,6 +8,11 @@ Images
 @inject(PoiService)
 export class ImageCard {
   @bindable singlePoi;
+  @bindable pois;
 
-  constructor(private ps: PoiService) {this.singlePoi = this.ps.singlePoi }
+  constructor(private ps: PoiService)
+  {
+    this.singlePoi = this.ps.singlePoi;
+    this.pois = this.ps.pois;
+  }
 }

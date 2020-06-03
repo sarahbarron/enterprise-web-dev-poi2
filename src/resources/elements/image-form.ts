@@ -6,6 +6,7 @@ import { Image} from '../../services/poi-types';
 export class ImageForm {
 
   @bindable singlePoi;
+  @bindable pois;
 
   selectedFiles: string[] = [];
   image: Image = {_id: '', url: '', public_id:''};
@@ -26,6 +27,7 @@ export class ImageForm {
   // Method to add the poi
   async addImage() {
     await this.selectedImage(this.selectedFiles[0]);
-    await this.ps.addImageToPoi(this.singlePoi._id, this.image._id);
+    const amendedPoi = await this.ps.addImageToPoi(this.singlePoi._id, this.image._id);
+    this.ps.getPoisByUser();
   }
 }
