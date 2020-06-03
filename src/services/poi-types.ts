@@ -5,6 +5,7 @@ export interface Poi {
   description: string;
   location: Location;
   category: Category;
+  image: Image;
 }
 
 // Category Type
@@ -44,7 +45,4 @@ export interface Image {
   _id: string;
   public_id: string;
   url: string;
-  poi: Poi;
 }
-
-

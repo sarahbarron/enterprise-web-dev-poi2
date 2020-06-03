@@ -1,0 +1,11 @@
+<template>
+  <form submit.delegate="addImage()" class="ui form stacked segment" enctype="multipart/form-data">
+    <h3 class="ui dividing header"> Add Another Image </h3>
+    <div class="field">
+      <label>Upload an Image</label>
+      <input type="file" files.bind="selectedFiles" accept="image/png, image/jpeg"></input>
+    </div>
+    <coordinates location.two-way="location"></coordinates>
+    <button value="upload" class="ui teal submit button">Add Image</button>
+  </form>
+</template>

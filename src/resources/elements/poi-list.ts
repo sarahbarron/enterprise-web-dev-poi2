@@ -13,6 +13,6 @@ export class PoiList {
   constructor(private ps: PoiService) { }
   async deletePoi(id) {
     await this.ps.deletePoi(id);
-    await this.ps.getPoisByUser();
+    // await this.ps.getPoisByUser();
   }
 }
