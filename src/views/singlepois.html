@@ -3,6 +3,7 @@
   <require from="../resources/elements/simple-map"></require>
   <require from="../resources/elements/single-poi"></require>
   <require from="../resources/elements/image-card"></require>
+  <require from="../resources/elements/image-form"></require>
 
 <!--  elements added -->
   <div class="ui container">
@@ -17,6 +18,10 @@
         </div>
         <div class="sixteen wide column">
           <image-card singlePoi.bind="singlePoi"></image-card>
+          <div class="ui hidden divider"></div>
+        </div>
+        <div class="sixteen wide column">
+          <image-form singlePoi.bind="singlePoi"></image-form>
           <div class="ui hidden divider"></div>
         </div>
       </div>

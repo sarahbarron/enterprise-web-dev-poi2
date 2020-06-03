@@ -27,9 +27,56 @@ export class PoiService {
     });
   }
 
+  async uploadImage(formData) {
+  try{
+      const cloudinaryHttp = new HttpClient();
+      cloudinaryHttp.configure(http => {
+        http.withBaseUrl('https://api.cloudinary.com/v1_1/sarahbarron');
+      });
+
+      const response = await cloudinaryHttp.post('/image/upload',formData);
+      console.log(response.content);
+      this.httpClient.configure(http => {http.withBaseUrl('http://localhost:3000');});
+      const url = response.content.url;
+      const public_id = response.content.public_id;
+      const img = this.image(public_id, url);
+      console.log(img);
+      return img;
+
+    }catch (e) {
+      console.log(e);
+    }
+  }
+
+  // constructor of a new image
+  async image(public_id: string, url: string) {
+    const image = {
+      public_id: public_id,
+      url: url,
+    };
+    const response = await this.httpClient.post('/api/images', image);
+    const newImage = response.content
+    this.images.push(newImage);
+    console.log(newImage);
+    return newImage;
+  }
+
+  async addImageToPoi(poi_id, img_id){
+    const addImage = {
+      img_id: img_id,
+      poi_id: poi_id
+    }
+    const response = await this.httpClient.post('/api/pois/addimage',addImage);
+    this.singlePoi = response;
+    await this.getPoisByUser();
+    console.log(this.singlePoi);
+  }
+
   async deletePoi(id) {
     console.log(id);
     const response = await this.httpClient.delete('/api/pois/' + id);
+    const index = await this.findPoiInPoisIndex(id);
+    await this.deletePoiInPoisArray(index);
   }
   async setSinglePoi(id) {
     const response = await this.httpClient.get('/api/pois/' + id);
@@ -72,7 +119,7 @@ export class PoiService {
   }
 
   // Constructor of a new poi
-  async poi(name: string, category: Category, description: string, location: Location) {
+  async poi(name: string, category: Category, description: string, location: Location, image: Image) {
 
     const newLocation = await this.location(location.lat, location.lng);
 
@@ -80,16 +127,18 @@ export class PoiService {
       name: name,
       category: category,
       description: description,
-      location: location
+      location: location,
+      image: image
     }
 
-    const response = await this.httpClient.post('/api/categories/' + category._id + '/locations/' + newLocation._id + '/pois', poi);
+    const response = await this.httpClient.post('/api/categories/' + category._id + '/locations/' + newLocation._id + '/images/'+image._id+'/pois', poi);
     const newPoi = {
       _id: response.content._id,
       name:name,
       category: category,
       description: description,
-      location: location
+      location: location,
+      image: image
     }
     this.pois.push(newPoi);
     this.total = this.total + 1;
@@ -117,6 +166,9 @@ export class PoiService {
     console.log(this.ratings);
   }
 
+
+
+
   // Get images
   async getImages() {
     const response = await this.httpClient.get('/api/images');
@@ -124,17 +176,6 @@ export class PoiService {
     console.log(this.images);
   }
 
-  // constructor of a new rating
-  async image(public_id: string, url: string, poi: Poi) {
-    const image = {
-      _id: '',
-      public_id: public_id,
-      url: url,
-      poi: poi
-    };
-    this.images.push(image);
-    console.log(this.image);
-  }
 
   // Check if user is already authenticated prior to asking the user to login or signup
   checkIsAuthenticated() {
@@ -201,4 +242,19 @@ export class PoiService {
     this.router.reset();
     this.au.setRoot(PLATFORM.moduleName(module));
   }
+
+  findPoiInPoisIndex(poi_id){
+    for(let i = 0; i<this.pois.length; i++){
+      console.log(this.pois[i]._id);
+      if(this.pois[i]._id === poi_id)
+      {
+        return i;
+      }
+    }
+  }
+
+  deletePoiInPoisArray(index){
+    this.pois = this.pois.splice(index,1);
+  }
 }
+
