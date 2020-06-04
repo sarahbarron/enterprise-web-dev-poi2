@@ -1,0 +1,17 @@
+<template>
+
+  <require from="../resources/elements/update-form"></require>
+  <require from="../resources/elements/image-form"></require>
+
+  <div class="ui container">
+    <div class="ui stackable grid">
+      <div class="eight wide column">
+        <update-form pois.two-way="pois" categories.bind="categories" current-poi.bind="currentPoi"></update-form>
+      </div>
+      <div class="eight wide column">
+        <image-form singlePoi.bind="singlePoi"></image-form>
+        <div class="ui hidden divider"></div>
+      </div>
+    </div>
+  </div>
+</template>

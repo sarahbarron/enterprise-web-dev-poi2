@@ -5,7 +5,7 @@ export interface Poi {
   description: string;
   location: Location;
   category: Category;
-  image: Image;
+  image: Image[];
 }
 
 // Category Type

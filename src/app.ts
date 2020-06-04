@@ -32,6 +32,13 @@ export class App {
         title: 'Poi'
       },
       {
+        route: 'update/:id',
+        name: 'update',
+        moduleId: PLATFORM.moduleName('views/update'),
+        nav: false,
+        title: 'Update Poi'
+      },
+      {
         route: ['rating'],
         name: 'rating',
         moduleId: PLATFORM.moduleName('views/ratings'),

@@ -121,24 +121,26 @@ export class PoiService {
   async poi(name: string, category: Category, description: string, location: Location, image: Image) {
 
     const newLocation = await this.location(location.lat, location.lng);
-
     const poi = {
       name: name,
       category: category,
       description: description,
-      location: location,
+      location: newLocation,
       image: image
     }
 
-    const response = await this.httpClient.post('/api/categories/' + category._id + '/locations/' + newLocation._id + '/images/'+image._id+'/pois', poi);
+    const response = await this.httpClient.post('/api/categories/' + category._id +'/pois', poi);
+
+    let images:Image[] = [image];
     const newPoi = {
       _id: response.content._id,
-      name:name,
+      name: name,
       category: category,
       description: description,
       location: location,
-      image: image
+      image: images
     }
+
     this.pois.push(newPoi);
     this.total = this.total + 1;
     this.ea.publish(new messageUpdate(this.total, newPoi));
@@ -258,7 +260,23 @@ export class PoiService {
     console.log("Deleted @ index: "+index);
   }
 
+  async updatePoi(id, name, description, categoryid, locationid){
+    const update = {
+      name: name,
+      description: description,
+      category: categoryid,
+      location: locationid
+    }
+    const response = await this.httpClient.post('/api/pois/update/' + id, update);
+    await this.getPoisByUser();
+  }
+
+  async updateLocation(id, location){
+    const editLocation = {
+      lat: location.lat,
+      lng: location.lng
+    }
+    await this.httpClient.post('/api/locations/update/'+ id, editLocation);
+  }
+
 }
-
-
-

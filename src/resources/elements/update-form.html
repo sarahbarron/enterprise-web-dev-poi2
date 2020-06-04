@@ -1,0 +1,33 @@
+<template>
+
+  <form submit.trigger="updatePoi()" class="ui form stacked segment" enctype="multipart/form-data">
+    <h3 class="ui dividing header"> Update Point of Interest </h3>
+    <div class="field">
+      <label>Name Of POI </label> <input value.bind="name" value="${currentPoi.name}" required>
+    </div>
+    <div class="field">
+      <label>Category</label>
+      <select class="ui fluid dropdown" value.bind="selectedCategory" required>
+        <option></option>
+        <option repeat.for="category of categories" model.bind="category">${category.name}</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Description </label> <input value.bind="description" value="${currentPoi.description}">
+    </div>
+
+    <div class="two fields">
+      <div class="field">
+        <label>Latitude</label>
+        <input value.bind="location.lat" value="${currentPoi.location.lat}" required>
+      </div>
+      <div class="field">
+        <label>Longitude</label>
+        <input value.bind="location.lng" value="${currentPoi.location.lng}" required>
+      </div>
+    </div>
+    <button class="ui teal submit button">Update POI</button>
+    <h3 class="teal">${message}</h3>
+  </form>
+
+</template>
