@@ -20,6 +20,7 @@ export class UpdateForm {
   selectedCategory: Category = null;
   location: Location;
   message = null;
+  error = null;
 
   constructor(private ps: PoiService, private router: Router) {  }
 
@@ -32,7 +33,7 @@ export class UpdateForm {
       await this.ps.updateLocation(this.currentPoi.location._id, this.location);
     }
 
-    await this.ps.updatePoi(this.currentPoi._id, this.name, this.description, this.selectedCategory._id, this.location._id);
+    this.error = await this.ps.updatePoi(this.currentPoi._id, this.name, this.description, this.selectedCategory._id, this.location._id);
 
 
     this.message = "Update Complete";

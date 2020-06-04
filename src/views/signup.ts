@@ -13,9 +13,10 @@ export class Signup {
   constructor(private ps: PoiService) {
   }
 
-  signup(e) {
+  async signup(e) {
     console.log(`Trying to sign up ${this.email}`);
-    const success = this.ps.signup(this.firstName, this.lastName, this.email, this.password);
+    const success = await this.ps.signup(this.firstName, this.lastName, this.email, this.password);
+    console.log("Success : "+success);
     if (!success) {
       this.prompt = 'Oops! Try again...';
     }

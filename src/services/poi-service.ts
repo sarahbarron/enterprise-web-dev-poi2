@@ -180,30 +180,52 @@ export class PoiService {
 
   // Check if user is already authenticated prior to asking the user to login or signup
   checkIsAuthenticated() {
-    let authenticated = false;
-    if (localStorage.poi !== 'null') {
-      authenticated = true;
-      this.httpClient.configure(http => {
-        const auth = JSON.parse(localStorage.poi);
-        http.withHeader('Authorization', 'bearer ' + auth.token);
-      });
-      this.changeRouter(PLATFORM.moduleName('app'));
+    try {
+      let authenticated = false;
+      if (localStorage.poi !== 'null') {
+        authenticated = true;
+        this.httpClient.configure(http => {
+          const auth = JSON.parse(localStorage.poi);
+          http.withHeader('Authorization', 'bearer ' + auth.token);
+        });
+        this.changeRouter(PLATFORM.moduleName('app'));
+      }
+    }catch (e) {
+      console.log(e);
     }
   }
 
   // Method for signing up
   async signup(firstName: string, lastName: string, email: string, password: string) {
+    let success = false;
     const user = {
       firstName: firstName,
       lastName: lastName,
       email: email,
       password: password
     };
-    const response = await this.httpClient.post('/api/users', user);
-    const newUser = await response.content;
-    await this.getCategories();
-    this.changeRouter(PLATFORM.moduleName('app'))
-    return false;
+    try {
+      let response = await this.httpClient.post('/api/users', user);
+      let status = await response.content;
+      if(status.success)
+      {
+        response = await this.httpClient.post('/api/users/authenticate', { email: email, password: password });
+        status = await response.content;
+      }
+      if (status.success) {
+        this.httpClient.configure((configuration) => {
+          configuration.withHeader('Authorization', 'bearer ' + status.token);
+        });
+        localStorage.poi = JSON.stringify(response.content)
+        await this.getCategories();
+        await this.getPoisByUser();
+        this.changeRouter(PLATFORM.moduleName('app'));
+        success = status.success;
+      }
+    }catch (e) {
+      success = false;
+    }
+    return success;
   }
 
   // Method for login
@@ -228,6 +250,7 @@ export class PoiService {
     return success;
   }
 
+  setUpJWT
   // Method for logout
   logout() {
     localStorage.poi = null;
