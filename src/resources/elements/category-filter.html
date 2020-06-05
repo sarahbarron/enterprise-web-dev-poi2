@@ -1,0 +1,13 @@
+<template>
+  <form submit.trigger="filter()" class="ui form stacked segment">
+    <h3 class="ui dividing header"> Filter By Category </h3>
+    <div class="field">
+      <label>Category</label>
+      <select class="ui fluid dropdown" value.bind="selectedCategory">
+        <option value="All Categories">All Categories</option>
+        <option repeat.for="category of categories" model.bind="category">${category.name}</option>
+      </select>
+    </div>
+    <button class="ui teal submit button">Filter</button>
+  </form>
+</template>

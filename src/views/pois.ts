@@ -9,12 +9,14 @@ export class Pois {
   pois: Poi[];
   categories: Category[];
   total = 0;
+  categoryfilter: Poi[];
 
   constructor(private ps: PoiService) {
     this.pois = ps.pois;
     this.categories = ps.categories;
     this.total = ps.total;
     this.ps.singlePoi =null;
+    this.categoryfilter = ps.categoryfilter;
   }
 
 }

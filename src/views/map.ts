@@ -7,7 +7,7 @@ import { Poi } from '../services/poi-types';
 @inject(PoiService)
 export class Map {
   mapId = 'main-map';
-  mapHeight = 600;
+  mapHeight = 900;
   map: LeafletMap;
   pois: Poi[];
 
@@ -20,7 +20,7 @@ export class Map {
       const poiStr = link
         ? `<a href='/singlepoi/${poi._id}'>${poi.category.name}<br>${poi.name} <small>(click for details}</small></a>`
         : poi.name;
-        // `${poi.category.name} ${poi.name}`;
+
       this.map.addMarker(poi.location, poiStr, 'POI');
 
     }

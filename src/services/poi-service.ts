@@ -19,6 +19,7 @@ export class PoiService {
   locations: Location[] = [];
   total = 0;
   singlePoi = null;
+  categoryfilter: Poi[] = [];
 
   // Constructor method
   constructor(private httpClient: HttpClient, private ea: EventAggregator, private au: Aurelia, private router: Router) {
@@ -40,7 +41,6 @@ export class PoiService {
       const url = response.content.url;
       const public_id = response.content.public_id;
       const img = this.image(public_id, url);
-      console.log(img);
       return img;
 
     }catch (e) {
@@ -61,12 +61,14 @@ export class PoiService {
     return newImage;
   }
 
-  async addImageToPoi(poi_id, img_id){
+  async addImageToPoi(poi_id, img){
     const addImage = {
-      img_id: img_id,
+      img_id: img._id,
       poi_id: poi_id
     }
     const response = await this.httpClient.post('/api/pois/addimage',addImage);
+    const index = this.findPoiInPoisIndex(poi_id)
+    this.pois[index].image.push(img);
     return response;
   }
 
@@ -234,6 +236,8 @@ export class PoiService {
     try {
       const response = await this.httpClient.post('/api/users/authenticate', { email: email, password: password });
       const status = await response.content;
+      const scope = status.scope[0];
+      console.log(scope);
       if (status.success) {
         this.httpClient.configure((configuration) => {
           configuration.withHeader('Authorization', 'bearer ' + status.token);
@@ -241,7 +245,14 @@ export class PoiService {
         localStorage.poi = JSON.stringify(response.content)
         await this.getCategories();
         await this.getPoisByUser();
-        this.changeRouter(PLATFORM.moduleName('app'));
+
+        if(scope === 'admin')
+        {
+          this.changeRouter(PLATFORM.moduleName('admin'));
+        }
+        else {
+          this.changeRouter(PLATFORM.moduleName('app'));
+        }
         success = status.success;
       }
     } catch (e) {
@@ -302,4 +313,25 @@ export class PoiService {
     await this.httpClient.post('/api/locations/update/'+ id, editLocation);
   }
 
+  async filterByCategory(categoryId)
+  {
+    this.categoryfilter = [];
+    console.log(this.categoryfilter);
+    for(let i = 0; i<this.pois.length; i++){
+      if(this.pois[i].category._id === categoryId)
+      {
+        this.categoryfilter.push(this.pois[i]);
+      }
+    }
+     // this.categoryfilter = this.pois.filter(Poi => Poi.category === category);
+     console.log(this.categoryfilter);
+  }
+  async filterByAllCategories()
+  {
+    this.categoryfilter = this.pois;
+    console.log("Filtered Category Array")
+    console.log(this.categoryfilter);
+    console.log("Pois Array")
+    console.log(this.pois);
+  }
 }

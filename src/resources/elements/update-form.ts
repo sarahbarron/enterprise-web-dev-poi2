@@ -15,8 +15,6 @@ export class UpdateForm {
   @bindable currentPoi: Poi;
   name: string;
   description: string;
-  // selectedCategory: Category = null;
-  // location: Location = { _id:'', lat: 53.2734, lng: -7.7783203 };
   selectedCategory: Category = null;
   location: Location;
   message = null;

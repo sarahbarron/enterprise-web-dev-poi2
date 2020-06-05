@@ -7,12 +7,12 @@ List of Pois
 * */
 @inject(PoiService)
 export class PoiList {
-  @bindable
-  pois: Poi[];
+
+  @bindable categoryfilter: Poi[];
 
   constructor(private ps: PoiService) { }
+
   async deletePoi(id) {
     await this.ps.deletePoi(id);
-    // await this.ps.getPoisByUser();
   }
 }

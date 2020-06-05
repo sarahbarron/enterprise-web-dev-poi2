@@ -27,7 +27,7 @@ export class ImageForm {
   // Method to add the poi
   async addImage() {
     await this.selectedImage(this.selectedFiles[0]);
-    const amendedPoi = await this.ps.addImageToPoi(this.singlePoi._id, this.image._id);
-    this.ps.getPoisByUser();
+    const amendedPoi = await this.ps.addImageToPoi(this.singlePoi._id, this.image);
+    // this.ps.getPoisByUser();
   }
 }

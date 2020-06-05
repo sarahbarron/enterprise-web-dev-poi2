@@ -2,11 +2,11 @@ import { RouterConfiguration, Router } from 'aurelia-router';
 import { PLATFORM } from 'aurelia-pal';
 
 // Router for an authenticated user
-export class App {
+export class Admin {
   router: Router;
 
   configureRouter(config: RouterConfiguration, router: Router) {
-    config.title = "Poi";
+    config.title = "Admin";
     config.options.pushState = true;
 
     config.map([
@@ -15,14 +15,14 @@ export class App {
         name: 'map',
         moduleId: PLATFORM.moduleName('views/map'),
         nav: true,
-        title: 'All Pois'
+        title: 'My Pois'
       },
       {
         route: 'pois',
         name: 'pois',
         moduleId: PLATFORM.moduleName('views/pois'),
         nav: true,
-        title: 'Manage Pois'
+        title: 'Manage My Pois'
       },
       {
         route: 'singlepoi/:id',
@@ -44,6 +44,13 @@ export class App {
         moduleId: PLATFORM.moduleName('views/ratings'),
         nav: true,
         title: 'Rating'
+      },
+      {
+        route: ['categories'],
+        name: 'categories',
+        moduleId: PLATFORM.moduleName(('views/categories')),
+        nav: true,
+        title: 'Categories',
       },
       {
         route: 'logout',
