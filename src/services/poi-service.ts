@@ -191,8 +191,9 @@ export class PoiService {
           const auth = JSON.parse(localStorage.poi);
           http.withHeader('Authorization', 'bearer ' + auth.token);
         });
-        this.changeRouter(PLATFORM.moduleName('app'));
-      }
+
+          this.changeRouter(PLATFORM.moduleName('app'));
+        }
     }catch (e) {
       console.log(e);
     }
