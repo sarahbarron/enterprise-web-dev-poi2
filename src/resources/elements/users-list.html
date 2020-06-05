@@ -13,11 +13,9 @@
       <tr repeat.for="user of users">
         <td> ${user.firstName} ${user.lastName}</td>
         <td>
-        <td>
           <button click.trigger="deleteUser(user._id)" class="ui icon button">
             <i class="icon red trash"></i>
           </button>
-        </td>
         </td>
       </tr>
       </tbody>

@@ -32,6 +32,13 @@ export class Admin {
         title: 'Users',
       },
       {
+        route: 'admin',
+        name: 'admin',
+        moduleId: PLATFORM.moduleName('views/admin'),
+        nav: true,
+        title: 'Admin'
+      },
+      {
         route: 'singlepoi/:id',
         name: 'singlepoi',
         moduleId: PLATFORM.moduleName('views/singlepois'),

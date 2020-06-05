@@ -28,4 +28,26 @@ export class AdminService {
     this.users = await response.content;
     console.log(this.users);
   }
+
+  async deleteUser(id) {
+    console.log(id);
+    const response = await this.httpClient.delete('/api/users/' + id);
+    const index = await this.findUserIndexInUsers(id);
+    await this.deleteUserInUsersArray(index);
+  }
+
+  findUserIndexInUsers(user_id){
+    for(let i = 0; i<this.users.length; i++){
+      console.log(this.users[i]._id);
+      if(this.users[i]._id === user_id)
+      {
+        return i;
+      }
+    }
+  }
+
+  deleteUserInUsersArray(index){
+    this.users = this.users.splice(index,1);
+  }
+
 }
