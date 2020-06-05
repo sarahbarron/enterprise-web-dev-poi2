@@ -1,0 +1,26 @@
+<template>
+
+  <div class="ui stacked segment">
+    <h3 class="ui dividing header"> Users </h3>
+    <table class="ui eight wide celled table segment">
+      <thead>
+      <tr>
+        <th>Users</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr repeat.for="user of users">
+        <td> ${user.firstName} ${user.lastName}</td>
+        <td>
+        <td>
+          <button click.trigger="deleteUser(user._id)" class="ui icon button">
+            <i class="icon red trash"></i>
+          </button>
+        </td>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</template>

@@ -25,6 +25,13 @@ export class Admin {
         title: 'Manage My Pois'
       },
       {
+        route: 'users',
+        name: 'users',
+        moduleId: PLATFORM.moduleName(('views/users')),
+        nav: true,
+        title: 'Users',
+      },
+      {
         route: 'singlepoi/:id',
         name: 'singlepoi',
         moduleId: PLATFORM.moduleName('views/singlepois'),

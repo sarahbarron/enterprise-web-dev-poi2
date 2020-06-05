@@ -1,5 +1,5 @@
 import { bindable, inject } from 'aurelia-framework';
-import { Poi, Category, Location,Image } from '../../services/poi-types';
+import { Poi, Category } from '../../services/poi-types';
 import { PoiService } from '../../services/poi-service';
 
 
@@ -10,22 +10,26 @@ import { PoiService } from '../../services/poi-service';
 export class CategoryFilter {
 
   @bindable categories: Category[];
-  @bindable categoryfilter: Poi[] ;
+  @bindable filter: Poi[] ;
+  // @bindable pois: Poi[];
+
   selectedCategory: any = null;
 
-  constructor(private ps: PoiService) {}
+  constructor(private ps: PoiService) {
+    this.selectedCategory = "All Categories";
+    this.applyFilter()
+  }
 
 
-  async filter()
+  async applyFilter()
   {
     if(this.selectedCategory === "All Categories")
     {
-     this.ps.filterByAllCategories();
+       this.filter = await this.ps.filterByAllCategories();
     }
     else
     {
-      console.log(this.selectedCategory);
-      this.ps.filterByCategory(this.selectedCategory._id);
+       this.filter = await this.ps.filterByCategory(this.selectedCategory._id);
     }
   }
 }

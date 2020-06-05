@@ -18,8 +18,9 @@
         <div class="ui hidden divider"></div>
       </div>
       <div class="sixteen wide column">
-        <category-filter categoryfilter.two-way="categoryfilter" categories.bind="categories"></category-filter>
-        <poi-list categoryfilter.bind="categoryfilter"></poi-list>
+        <category-filter categories.bind="categories"  filter.bind="filter"></category-filter>
+        <poi-list filter.bind="filter"></poi-list>
+
       </div>
     </div>
   </div>
