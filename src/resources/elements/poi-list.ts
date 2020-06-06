@@ -8,9 +8,9 @@ List of Pois
 @inject(PoiService)
 export class PoiList {
 
-  @bindable categoryfilter: Poi[];
+  @bindable filter: Poi[];
 
-  constructor(private ps: PoiService) { }
+  constructor(private ps: PoiService) {  }
 
   async deletePoi(id) {
     await this.ps.deletePoi(id);

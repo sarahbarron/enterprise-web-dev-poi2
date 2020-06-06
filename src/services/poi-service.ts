@@ -1,4 +1,4 @@
-import { LeafletMap } from './leaflet-map';
+
 import { inject, Aurelia } from 'aurelia-framework';
 import { Router } from 'aurelia-router';
 import { PLATFORM } from 'aurelia-pal';
@@ -6,6 +6,8 @@ import { Poi, Rating, Category, Image, Location } from './poi-types';
 import { HttpClient } from 'aurelia-http-client';
 import { EventAggregator } from 'aurelia-event-aggregator'
 import { messageUpdate } from './messages';
+
+
 
 /*
 * Service Class for the Point of Interest project
@@ -19,13 +21,14 @@ export class PoiService {
   locations: Location[] = [];
   total = 0;
   singlePoi = null;
-  categoryfilter: Poi[] = [];
-
+  filter: Poi[] = [];
+  scope: string;
   // Constructor method
   constructor(private httpClient: HttpClient, private ea: EventAggregator, private au: Aurelia, private router: Router) {
     httpClient.configure((http) => {
       http.withBaseUrl('http://localhost:3000');
     });
+
   }
 
   async uploadImage(formData) {
@@ -143,7 +146,8 @@ export class PoiService {
       image: images
     }
 
-    this.pois.push(newPoi);
+    await this.pois.push(newPoi);
+    this.filter = this.pois;
     this.total = this.total + 1;
     this.ea.publish(new messageUpdate(this.total, newPoi));
     console.log(this.pois);
@@ -190,8 +194,9 @@ export class PoiService {
           const auth = JSON.parse(localStorage.poi);
           http.withHeader('Authorization', 'bearer ' + auth.token);
         });
-        this.changeRouter(PLATFORM.moduleName('app'));
-      }
+
+          this.changeRouter(PLATFORM.moduleName('app'));
+        }
     }catch (e) {
       console.log(e);
     }
@@ -236,8 +241,8 @@ export class PoiService {
     try {
       const response = await this.httpClient.post('/api/users/authenticate', { email: email, password: password });
       const status = await response.content;
-      const scope = status.scope[0];
-      console.log(scope);
+      this.scope = status.scope[0];
+
       if (status.success) {
         this.httpClient.configure((configuration) => {
           configuration.withHeader('Authorization', 'bearer ' + status.token);
@@ -245,8 +250,8 @@ export class PoiService {
         localStorage.poi = JSON.stringify(response.content)
         await this.getCategories();
         await this.getPoisByUser();
-
-        if(scope === 'admin')
+        await this.filterByAllCategories();
+        if(this.scope === 'admin')
         {
           this.changeRouter(PLATFORM.moduleName('admin'));
         }
@@ -261,7 +266,7 @@ export class PoiService {
     return success;
   }
 
-  setUpJWT
+
   // Method for logout
   logout() {
     localStorage.poi = null;
@@ -291,7 +296,6 @@ export class PoiService {
 
   deletePoiInPoisArray(index){
     this.pois = this.pois.splice(index,1);
-    console.log("Deleted @ index: "+index);
   }
 
   async updatePoi(id, name, description, categoryid, locationid){
@@ -315,23 +319,25 @@ export class PoiService {
 
   async filterByCategory(categoryId)
   {
-    this.categoryfilter = [];
-    console.log(this.categoryfilter);
+
+    this.filter.splice(0,this.filter.length);
+    this.pois;
     for(let i = 0; i<this.pois.length; i++){
       if(this.pois[i].category._id === categoryId)
       {
-        this.categoryfilter.push(this.pois[i]);
+        this.filter.push(this.pois[i]);
       }
     }
-     // this.categoryfilter = this.pois.filter(Poi => Poi.category === category);
-     console.log(this.categoryfilter);
+    return this.filter;
+
   }
   async filterByAllCategories()
   {
-    this.categoryfilter = this.pois;
-    console.log("Filtered Category Array")
-    console.log(this.categoryfilter);
-    console.log("Pois Array")
-    console.log(this.pois);
+    this.filter.splice(0,this.filter.length);
+    for(let i=0; i<this.pois.length; i++)
+    {
+      this.filter.push(this.pois[i]);
+    }
+    return this.filter
   }
 }

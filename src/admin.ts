@@ -24,6 +24,14 @@ export class Admin {
         nav: true,
         title: 'Manage My Pois'
       },
+
+      {
+        route: 'admin',
+        name: 'admin',
+        moduleId: PLATFORM.moduleName('views/admin'),
+        nav: true,
+        title: 'Admin'
+      },
       {
         route: 'singlepoi/:id',
         name: 'singlepoi',
@@ -45,13 +53,7 @@ export class Admin {
         nav: true,
         title: 'Rating'
       },
-      {
-        route: ['categories'],
-        name: 'categories',
-        moduleId: PLATFORM.moduleName(('views/categories')),
-        nav: true,
-        title: 'Categories',
-      },
+
       {
         route: 'logout',
         name: 'logout',
