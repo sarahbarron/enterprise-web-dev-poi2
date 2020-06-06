@@ -5,11 +5,6 @@
   <require from="../resources/elements/admin-pois"></require>
 
   <div class="ui container">
-    <div class="ui stackable grid">
-      <div class="sixteen wide column">
-        <users-list users.bind="users"></users-list>
-      </div>
-    </div>
     <div class="ui raised container segment stackable two column grid">
       <div class="column"><h2>Categories </h2></div>
       <div></div>
@@ -21,6 +16,12 @@
         <category-list categories.bind="categories"></category-list>
       </div>
     </div>
+    <div class="ui stackable grid">
+      <div class="sixteen wide column">
+        <users-list users.bind="users"></users-list>
+      </div>
+    </div>
+
     <div class="ui raised container segment stackable one column grid">
       <div class="ui stackable grid">
         <div class="sixteen wide column">

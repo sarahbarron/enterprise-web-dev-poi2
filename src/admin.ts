@@ -10,8 +10,16 @@ export class Admin {
     config.options.pushState = true;
 
     config.map([
+
       {
-        route: ['','map'],
+        route: ['','admin'],
+        name: 'admin',
+        moduleId: PLATFORM.moduleName('views/admin'),
+        nav: true,
+        title: 'Admin'
+      },
+      {
+        route: 'map',
         name: 'map',
         moduleId: PLATFORM.moduleName('views/map'),
         nav: true,
@@ -23,14 +31,6 @@ export class Admin {
         moduleId: PLATFORM.moduleName('views/pois'),
         nav: true,
         title: 'Manage My Pois'
-      },
-
-      {
-        route: 'admin',
-        name: 'admin',
-        moduleId: PLATFORM.moduleName('views/admin'),
-        nav: true,
-        title: 'Admin'
       },
       {
         route: 'singlepoi/:id',
