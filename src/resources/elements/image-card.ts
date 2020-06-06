@@ -15,4 +15,8 @@ export class ImageCard {
     this.singlePoi = this.ps.singlePoi;
     this.pois = this.ps.pois;
   }
+
+  async deleteImage(img_id, poi_id) {
+    await this.ps.deleteImage(img_id, poi_id);
+  }
 }

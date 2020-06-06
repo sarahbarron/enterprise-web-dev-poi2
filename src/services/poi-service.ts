@@ -17,8 +17,6 @@ export class PoiService {
   pois: Poi[] = [];
   ratings: Rating[] = [];
   categories: Category[] = [];
-  images: Image[] = [];
-  locations: Location[] = [];
   total = 0;
   singlePoi = null;
   filter: Poi[] = [];
@@ -59,8 +57,6 @@ export class PoiService {
     };
     const response = await this.httpClient.post('/api/images', image);
     const newImage = response.content
-    this.images.push(newImage);
-    console.log(newImage);
     return newImage;
   }
 
@@ -137,8 +133,6 @@ export class PoiService {
     }
     const response = await this.httpClient.post('/api/locations', location);
     const newLocation = await response.content;
-    this.locations.push(newLocation);
-    console.log(this.locations);
     return (newLocation)
   }
 
@@ -193,14 +187,28 @@ export class PoiService {
     console.log(this.ratings);
   }
 
+  // delete images from the database
+  async deleteImage(img_id, poi_id) {
+    const response = await this.httpClient.delete('/api/images/' + img_id);
+    console.log("Deleted Image Id:" +img_id);
+    const poi_index = await this.findPoiInPoisIndex(poi_id);
+    const image_index = await this.findImageInPoisIndex(poi_index, img_id);
+    await this.deleteLocalImage(poi_index, image_index);
+  }
 
+  async findImageInPoisIndex(index, img_id)
+  {
+    for(let i = 0; i<this.pois[index].image.length; i++){
+      if(this.pois[index].image[i]._id === img_id)
+      {
+        return i;
+      }
+    }
+  }
 
-
-  // Get images
-  async getImages() {
-    const response = await this.httpClient.get('/api/images');
-    this.images = await response.content;
-    console.log(this.images);
+  async deleteLocalImage(poi_index, img_index)
+  {
+    this.pois[poi_index].image.splice(img_index,1);
   }
 
 
@@ -254,6 +262,7 @@ export class PoiService {
     }
     return success;
   }
+
 
   // Method for login
   async login(email: string, password: string) {
