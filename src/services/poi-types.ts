@@ -46,3 +46,13 @@ export interface Image {
   public_id: string;
   url: string;
 }
+
+export interface Pois{
+  _id: string;
+  name: string;
+  description: string;
+  location: Location;
+  category: Category;
+  image: Image[];
+  user: User[];
+}

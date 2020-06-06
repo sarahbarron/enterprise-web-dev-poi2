@@ -7,6 +7,8 @@ import { HttpClient } from 'aurelia-http-client';
 import { EventAggregator } from 'aurelia-event-aggregator'
 import { messageUpdate } from './messages';
 
+
+
 /*
 * Service Class for the Point of Interest project
 * */
@@ -20,12 +22,13 @@ export class PoiService {
   total = 0;
   singlePoi = null;
   filter: Poi[] = [];
-
+  scope: string;
   // Constructor method
   constructor(private httpClient: HttpClient, private ea: EventAggregator, private au: Aurelia, private router: Router) {
     httpClient.configure((http) => {
       http.withBaseUrl('http://localhost:3000');
     });
+
   }
 
   async uploadImage(formData) {
@@ -238,8 +241,8 @@ export class PoiService {
     try {
       const response = await this.httpClient.post('/api/users/authenticate', { email: email, password: password });
       const status = await response.content;
-      const scope = status.scope[0];
-      console.log(scope);
+      this.scope = status.scope[0];
+
       if (status.success) {
         this.httpClient.configure((configuration) => {
           configuration.withHeader('Authorization', 'bearer ' + status.token);
@@ -248,7 +251,7 @@ export class PoiService {
         await this.getCategories();
         await this.getPoisByUser();
         await this.filterByAllCategories();
-        if(scope === 'admin')
+        if(this.scope === 'admin')
         {
           this.changeRouter(PLATFORM.moduleName('admin'));
         }
@@ -263,7 +266,7 @@ export class PoiService {
     return success;
   }
 
-  setUpJWT
+
   // Method for logout
   logout() {
     localStorage.poi = null;
