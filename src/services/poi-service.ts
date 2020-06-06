@@ -97,6 +97,26 @@ export class PoiService {
     console.log(this.categories);
   }
 
+  async deleteCategory(id) {
+    console.log(id);
+    const response = await this.httpClient.delete('/api/categories/' + id);
+    const index = await this.findCategoryIndex(id);
+    await this.deleteLocalCategory(index);
+  }
+
+  findCategoryIndex(category_id){
+    for(let i = 0; i<this.categories.length; i++){
+      console.log(this.categories[i]._id);
+      if(this.categories[i]._id === category_id)
+      {
+        return i;
+      }
+    }
+  }
+
+  deleteLocalCategory(index){
+    this.categories = this.categories.splice(index,1);
+  }
 
   // constructor of a new category
   async category(name: string) {

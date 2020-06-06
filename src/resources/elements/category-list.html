@@ -6,11 +6,15 @@
       <thead>
       <tr>
         <th>Category</th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
       <tr repeat.for="category of categories">
         <td> ${category.name}</td>
+        <td> <button click.trigger="deleteCategory(category._id)" class="ui icon button">
+          <i class="icon red trash"></i>
+        </button></td>
       </tr>
       </tbody>
     </table>
