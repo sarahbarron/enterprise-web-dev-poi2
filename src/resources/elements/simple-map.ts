@@ -42,7 +42,7 @@ export class SimpleMap {
     const mapConfig = {
       location: { _id: '', lat: 52.865196, lng: -7.97946 },
       zoom: 7,
-      minZoom: 7,
+      minZoom: 7
     };
     this.map = new LeafletMap(this.mapId, mapConfig, 'Terrain');
     this.map.showZoomControl();

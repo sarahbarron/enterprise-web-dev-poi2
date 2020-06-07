@@ -16,7 +16,7 @@ export class Signup {
   async signup(e) {
     console.log(`Trying to sign up ${this.email}`);
     const success = await this.ps.signup(this.firstName, this.lastName, this.email, this.password);
-    console.log("Success : "+success);
+    console.log('Success : ' + success);
     if (!success) {
       this.prompt = 'Oops! Try again...';
     }

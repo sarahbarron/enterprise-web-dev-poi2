@@ -10,8 +10,9 @@ export class PoiList {
 
   @bindable filter: Poi[];
 
-  constructor(private ps: PoiService) {  }
-
+  constructor(private ps: PoiService) {
+  }
+  // Delete a poi
   async deletePoi(id) {
     await this.ps.deletePoi(id);
   }

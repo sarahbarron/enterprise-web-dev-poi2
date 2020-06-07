@@ -6,24 +6,28 @@ export class App {
   router: Router;
 
   configureRouter(config: RouterConfiguration, router: Router) {
-    config.title = "Poi";
+    config.title = 'Poi';
     config.options.pushState = true;
-
+    // route to the home page and map
     config.map([
       {
-        route: ['','map'],
+        route: ['', 'map'],
         name: 'map',
         moduleId: PLATFORM.moduleName('views/map'),
         nav: true,
-        title: 'All Pois'
+        title: 'Map'
       },
+
+      // route to the add and list pois page
       {
         route: 'pois',
         name: 'pois',
         moduleId: PLATFORM.moduleName('views/pois'),
         nav: true,
-        title: 'Manage Pois'
+        title: 'Pois'
       },
+
+      // Route to view a single poi
       {
         route: 'singlepoi/:id',
         name: 'singlepoi',
@@ -31,6 +35,8 @@ export class App {
         nav: false,
         title: 'Poi'
       },
+
+      // Route to update a poi
       {
         route: 'update/:id',
         name: 'update',
@@ -38,13 +44,17 @@ export class App {
         nav: false,
         title: 'Update Poi'
       },
+
+      // route to rate and review a poi to be finished
       {
         route: ['rating'],
         name: 'rating',
         moduleId: PLATFORM.moduleName('views/ratings'),
-        nav: true,
+        nav: false,
         title: 'Rating'
       },
+
+      // route to logout
       {
         route: 'logout',
         name: 'logout',

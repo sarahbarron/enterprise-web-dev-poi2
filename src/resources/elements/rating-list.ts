@@ -1,10 +1,10 @@
-import {bindable} from 'aurelia-framework';
+import { bindable } from 'aurelia-framework';
 import { Rating } from '../../services/poi-types';
 
 /*
 * List of all Reviews and Ratings
 * */
-export class RatingList{
+export class RatingList {
   @bindable
-  ratings : Rating[];
+  ratings: Rating[];
 }

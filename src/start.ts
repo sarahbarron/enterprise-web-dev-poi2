@@ -7,8 +7,10 @@ import { PoiService } from './services/poi-service';
 @inject(PoiService)
 export class Start {
   router: Router;
-  constructor(private ps: PoiService) {}
 
+  constructor(private ps: PoiService) {
+  }
+  // Route to login screen
   configureRouter(config: RouterConfiguration, router: Router) {
     config.map([
       {
@@ -18,6 +20,8 @@ export class Start {
         nav: true,
         title: 'Login'
       },
+
+      // Route to sign up
       {
         route: 'signup',
         name: 'signup',
