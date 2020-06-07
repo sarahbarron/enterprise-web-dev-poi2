@@ -1,10 +1,10 @@
 <template>
   <require from="./coordinates"></require>
 
-  <form submit.trigger="addPoi()" class="ui form stacked segment">
+  <form submit.trigger="addPoi()" class="ui form stacked segment" enctype="multipart/form-data">
     <h3 class="ui dividing header"> Add a Point of Interest </h3>
     <div class="field">
-      <label>Name Of POI </label> <input value.bind="name">
+      <label>Name Of POI </label> <input value.bind="name" required>
     </div>
     <div class="field">
       <label>Category</label>
@@ -17,7 +17,7 @@
     </div>
     <div class="field">
       <label>Upload an Image</label>
-      <input value.bind="image" type="file" accept="image/png, image/jpeg">
+      <input type="file" files.bind="selectedFiles" accept="image/png, image/jpeg" required></input>
     </div>
     <coordinates location.two-way="location"></coordinates>
     <button class="ui teal submit button">Add POI</button>

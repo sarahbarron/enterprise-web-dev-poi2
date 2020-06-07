@@ -3,6 +3,8 @@
   <require from="../resources/elements/poi-form"></require>
   <require from="../resources/elements/total-pois"></require>
   <require from="../resources/elements/simple-map"></require>
+  <require from="../resources/elements/category-filter"></require>
+
   <div class="ui container">
     <div class="ui stackable grid">
       <div class="seven wide column">
@@ -14,7 +16,12 @@
       <div class="seven wide column">
         <simple-map></simple-map>
         <div class="ui hidden divider"></div>
-        <poi-list pois.bind="pois"></poi-list>
+      </div>
+      <div class="sixteen wide column">
+        <category-filter categories.bind="categories" filter.bind="filter"></category-filter>
+        <poi-list filter.bind="filter"></poi-list>
+
       </div>
     </div>
+  </div>
 </template>

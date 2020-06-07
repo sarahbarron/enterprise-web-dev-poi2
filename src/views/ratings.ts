@@ -1,14 +1,16 @@
-import {inject} from 'aurelia-framework';
+import { inject } from 'aurelia-framework';
 import { Rating, Poi } from '../services/poi-types';
-import {PoiService} from '../services/poi-service';
+import { PoiService } from '../services/poi-service';
 
+/* Review and Ratings modal class*/
 @inject(PoiService)
-export class Ratings{
-    ratings: Rating[];
-    pois: Poi[];
+export class Ratings {
+  ratings: Rating[];
+  pois: Poi[];
 
-    constructor(private rts: PoiService) {
-      this.pois = rts.pois;
-      this.ratings = rts.ratings;
-    }
+  constructor(private ps: PoiService) {
+    this.pois = ps.pois;
+    this.ratings = ps.ratings;
+    ps.singlePoi = null;
+  }
 }

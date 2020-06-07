@@ -1,7 +1,10 @@
-import {bindable, inject} from 'aurelia-framework';
+import { bindable, inject } from 'aurelia-framework';
 import { Category } from '../../services/poi-types';
 import { PoiService } from '../../services/poi-service';
 
+/*
+Form for creating a category
+ */
 @inject(PoiService)
 export class CategoryForm {
 
@@ -10,7 +13,9 @@ export class CategoryForm {
   name: string;
 
   constructor(private ps: PoiService) {}
-  makeCategory(){
+
+  // creates a category using the input from user
+  makeCategory() {
     this.ps.category(this.name);
   }
 
