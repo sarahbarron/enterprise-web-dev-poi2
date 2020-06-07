@@ -23,8 +23,8 @@ export class PoiService {
   // Constructor method
   constructor(private httpClient: HttpClient, private ea: EventAggregator, private au: Aurelia, private router: Router) {
     httpClient.configure((http) => {
-      http.withBaseUrl('http://localhost:3000');
-      // http.withBaseUrl('https://enterprise-web-poi2.herokuapp.com');
+      // http.withBaseUrl('http://localhost:3000');
+      http.withBaseUrl('https://enterprise-web-poi2.herokuapp.com');
     });
 
   }
@@ -43,8 +43,8 @@ export class PoiService {
       const response = await cloudinaryHttp.post('/image/upload', formData);
       console.log(response.content);
       this.httpClient.configure(http => {
-        http.withBaseUrl('http://localhost:3000');
-        // http.withBaseUrl('https://enterprise-web-poi2.herokuapp.com');
+        // http.withBaseUrl('http://localhost:3000');
+        http.withBaseUrl('https://enterprise-web-poi2.herokuapp.com');
       });
       const url = response.content.url;
       const public_id = response.content.public_id;
