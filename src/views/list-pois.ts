@@ -4,7 +4,7 @@ import { PoiService } from '../services/poi-service';
 
 /* Pois modal for viewing & creating pois*/
 @inject(PoiService)
-export class Pois {
+export class ListPois {
 
   pois: Poi[];
   categories: Category[];

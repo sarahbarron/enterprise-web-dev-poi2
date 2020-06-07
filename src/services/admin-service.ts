@@ -15,8 +15,8 @@ export class AdminService {
   // Constructor method
   constructor(private httpClient: HttpClient, private ea: EventAggregator, private au: Aurelia, private router: Router) {
     httpClient.configure((http) => {
-      // http.withBaseUrl('http://localhost:3000');
-      http.withBaseUrl('https://enterprise-web-poi2.herokuapp.com');
+      http.withBaseUrl('http://localhost:3000');
+      // http.withBaseUrl('https://enterprise-web-poi2.herokuapp.com');
     });
   }
 

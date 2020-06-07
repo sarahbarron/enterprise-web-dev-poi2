@@ -18,13 +18,23 @@ export class Admin {
         nav: true,
         title: 'Map'
       },
-      // route to list of pois
+
+      // route to view  pois page
+      {
+        route: 'all-pois',
+        name: 'pois',
+        moduleId: PLATFORM.moduleName('views/list-pois'),
+        nav: true,
+        title: 'View All Pois'
+      },
+
+      // route to Add a pois
       {
         route: 'pois',
         name: 'pois',
         moduleId: PLATFORM.moduleName('views/pois'),
         nav: true,
-        title: 'All Pois'
+        title: 'Add Pois'
       },
 
       // route to categories list and add form

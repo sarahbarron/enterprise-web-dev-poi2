@@ -1,0 +1,19 @@
+<template>
+  <require from="../resources/elements/poi-list"></require>
+  <require from="../resources/elements/poi-form"></require>
+  <require from="../resources/elements/total-pois"></require>
+  <require from="../resources/elements/simple-map"></require>
+  <require from="../resources/elements/category-filter"></require>
+
+  <div class="ui container">
+    <div class="ui stackable grid">
+      <div class="two wide column">
+        <total-pois total.bind="total"></total-pois>
+      </div>
+      <div class="fourteen wide column">
+        <category-filter categories.bind="categories" filter.bind="filter"></category-filter>
+        <poi-list filter.bind="filter"></poi-list>
+      </div>
+    </div>
+  </div>
+</template>

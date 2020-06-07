@@ -20,11 +20,19 @@ export class App {
 
       // route to the add and list pois page
       {
+        route: 'all-pois',
+        name: 'pois',
+        moduleId: PLATFORM.moduleName('views/list-pois'),
+        nav: true,
+        title: 'Pois'
+      },
+      // route to the add and list pois page
+      {
         route: 'pois',
         name: 'pois',
         moduleId: PLATFORM.moduleName('views/pois'),
         nav: true,
-        title: 'Pois'
+        title: 'Add Poi'
       },
 
       // Route to view a single poi
