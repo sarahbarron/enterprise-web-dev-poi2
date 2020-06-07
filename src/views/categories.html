@@ -1,0 +1,17 @@
+<template>
+  <require from="../resources/elements/category-list"></require>
+  <require from="../resources/elements/category-form"></require>
+
+  <div class="ui container">
+    <div class="ui raised container segment stackable two column grid">
+      <div class="column"><h2>Categories </h2></div>
+      <div></div>
+      <div class="column">
+        <category-form categories.bind="categories"></category-form>
+      </div>
+      <div class="column">
+        <category-list categories.bind="categories"></category-list>
+      </div>
+    </div>
+  </div>
+</template>

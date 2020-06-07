@@ -1,7 +1,8 @@
 import { bindable, inject } from 'aurelia-framework';
-import { PoiService} from '../../services/poi-service';
-import { Image} from '../../services/poi-types';
+import { PoiService } from '../../services/poi-service';
+import { Image } from '../../services/poi-types';
 
+// Form to add an image
 @inject(PoiService)
 export class ImageForm {
 
@@ -9,13 +10,14 @@ export class ImageForm {
   @bindable pois;
 
   selectedFiles: string[] = [];
-  image: Image = {_id: '', url: '', public_id:''};
+  image: Image = { _id: '', url: '', public_id: '' };
 
   constructor(private ps: PoiService) {
-    this.singlePoi = this.ps.singlePoi
+    this.singlePoi = this.ps.singlePoi;
   }
 
-  async selectedImage(imageFile){
+  // selected Image method to post to cloudinary
+  async selectedImage(imageFile) {
     var formData = new FormData();
     formData.append('file', imageFile);
     formData.append('upload_preset', 'er9yfp5t');
@@ -23,11 +25,10 @@ export class ImageForm {
     this.image = response;
     console.log(this.image);
   }
-  //
-  // Method to add the poi
+
+  // Method to add send image file to cloudinary and store image details in db
   async addImage() {
     await this.selectedImage(this.selectedFiles[0]);
     const amendedPoi = await this.ps.addImageToPoi(this.singlePoi._id, this.image);
-    // this.ps.getPoisByUser();
   }
 }

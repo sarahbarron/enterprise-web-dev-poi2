@@ -12,10 +12,11 @@ export class Map {
   pois: Poi[];
 
 
-  constructor(private ds: PoiService) { }
+  constructor(private ds: PoiService) {
+  }
 
-  // Render all points of interest and retrieve their loction to place a marker on the map
-  renderPois(link:boolean = true) {
+  // Render points of interest and retrieve their location to place a marker on the map
+  renderPois(link: boolean = true) {
     for (let poi of this.ds.pois) {
       const poiStr = link
         ? `<a href='/singlepoi/${poi._id}'>${poi.category.name}<br>${poi.name} <small>(click for details}</small></a>`

@@ -1,5 +1,4 @@
 <template>
-
   <div class="ui stacked segment">
     <h3 class="ui dividing header"> List Of Categories </h3>
     <table class="ui celled table segment">
@@ -12,9 +11,11 @@
       <tbody>
       <tr repeat.for="category of categories">
         <td> ${category.name}</td>
-        <td> <button click.trigger="deleteCategory(category._id)" class="ui icon button">
-          <i class="icon red trash"></i>
-        </button></td>
+        <td>
+          <button click.trigger="deleteCategory(category._id)" class="ui icon button">
+            <i class="icon red trash"></i>
+          </button>
+        </td>
       </tr>
       </tbody>
     </table>

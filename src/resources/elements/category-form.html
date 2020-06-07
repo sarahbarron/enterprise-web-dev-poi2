@@ -1,14 +1,12 @@
 <template>
   <div class="ui raised very padded container segment">
-  <form submit.trigger="makeCategory()" class="ui form">
-    <h3 class="ui dividing header"><i class="teal large plus circle icon"></i>Create A New Category</h3>
-
+    <form submit.trigger="makeCategory()" class="ui form">
+      <h3 class="ui dividing header"><i class="teal large plus circle icon"></i>Create A New Category</h3>
       <div class="field">
         <label>Category Name</label>
-        <input type="text" value.bind="name" />
+        <input type="text" value.bind="name"/>
       </div>
-
-    <button class="ui teal submit button">Add Category</button>
-  </form>
+      <button class="ui teal submit button">Add Category</button>
+    </form>
   </div>
 </template>

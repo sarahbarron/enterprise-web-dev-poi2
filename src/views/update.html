@@ -2,6 +2,7 @@
 
   <require from="../resources/elements/update-form"></require>
   <require from="../resources/elements/image-form"></require>
+  <require from="../resources/elements/image-card"></require>
 
   <div class="ui container">
     <div class="ui stackable grid">
@@ -10,6 +11,10 @@
       </div>
       <div class="eight wide column">
         <image-form singlePoi.bind="singlePoi"></image-form>
+        <div class="ui hidden divider"></div>
+      </div>
+      <div class="sixteen wide column">
+        <image-card singlePoi.bind="singlePoi" pois.bind="pois"></image-card>
         <div class="ui hidden divider"></div>
       </div>
     </div>

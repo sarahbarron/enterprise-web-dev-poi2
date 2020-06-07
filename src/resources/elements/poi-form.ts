@@ -1,7 +1,6 @@
 import { bindable, inject } from 'aurelia-framework';
-import { Poi, Category, Location,Image } from '../../services/poi-types';
+import { Poi, Category, Location, Image } from '../../services/poi-types';
 import { PoiService } from '../../services/poi-service';
-
 
 /*
 * Class for the poi form input to add a poi to a users account
@@ -14,14 +13,15 @@ export class PoiForm {
   name: string;
   description: string;
   selectedCategory: Category = null;
-  location: Location = { _id:'', lat: 53.2734, lng: -7.7783203 };
-  image: Image = {_id: '', url: '', public_id: ''};
+  location: Location = { _id: '', lat: 53.2734, lng: -7.7783203 };
+  image: Image = { _id: '', url: '', public_id: '' };
   selectedFiles: string[] = [];
 
-  constructor(private ps: PoiService) {}
+  constructor(private ps: PoiService) {
+  }
 
-
-  async selectedImage(imageFile){
+  // Method to upload image to cloudinary from the form
+  async selectedImage(imageFile) {
     var formData = new FormData();
     formData.append('file', imageFile);
     formData.append('upload_preset', 'er9yfp5t');
@@ -29,6 +29,7 @@ export class PoiForm {
     this.image = response;
     console.log(this.image);
   }
+
   //
   // Method to add the poi
   async addPoi() {
